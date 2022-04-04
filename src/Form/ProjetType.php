@@ -14,9 +14,6 @@ class ProjetType extends AbstractType
         $builder
             ->add('name')
             ->add('slug')
-            ->add('created')
-            ->add('updated')
-            ->add('user')
         ;
     }
 

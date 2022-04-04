@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/projects')]
 class ProjectsController extends AbstractController
 {
-    #[Route('/', name: 'app_projects_index', methods: ['GET'])]
+    #[Route('/', name: 'app_projects', methods: ['GET'])]
     public function index(ProjetRepository $projetRepository): Response
     {
         return $this->render('projects/index.html.twig', [
@@ -29,8 +29,12 @@ class ProjectsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Auteur du projet
+            $projet->setUser($this->getUser());
+
             $projetRepository->add($projet);
-            return $this->redirectToRoute('app_projects_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_projects', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('projects/new.html.twig', [
@@ -55,7 +59,7 @@ class ProjectsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $projetRepository->add($projet);
-            return $this->redirectToRoute('app_projects_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_projects', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('projects/edit.html.twig', [
@@ -71,6 +75,6 @@ class ProjectsController extends AbstractController
             $projetRepository->remove($projet);
         }
 
-        return $this->redirectToRoute('app_projects_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_projects', [], Response::HTTP_SEE_OTHER);
     }
 }
