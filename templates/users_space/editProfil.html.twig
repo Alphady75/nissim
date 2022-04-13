@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edition du profil de {{ app.user.nom ~ " " ~ app.user.prenom }} {% endblock %}
+
+{% block header %}
+
+    {% include "partials/front/base/_Header.html.twig" %}
+
+{% endblock %}
+
+{% block contentClass %}dashboard-content gray-bg{% endblock %}
+
+{% block dashboardTitle %}Edition du profil de {{ app.user.nom ~ " " ~ app.user.prenom }}{% endblock %}
+
+{% block adminSideBar %}
+
+    {% include "partials/admin/_SideBar.html.twig" %}
+
+{% endblock %}
+
+{% block body %}
+
+<section class="row">
+    <div class="col-md-10">
+        {{ form_start(userForm) }}
+            <!--FAQ-->
+            <article class="ts-faq">
+                                        
+                <h5>Informations Individuelles</h5>
+                                        
+                <div class="row">
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.nom, {label: 'Nom'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(userForm.prenom, {label: 'Prénom'}) }}
+                    </div>
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.avatar, {label: 'Image de profil'}) }}
+                    </div>
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.genre, {label: 'Genre'}) }}
+                    </div>
+        
+                    <div class="col-md-12">
+                        {{ form_row(userForm.biographie, {label: 'A propos de vous'}) }}
+                    </div>
+        
+                </div>
+                                        
+                                        
+            </article>
+        
+            <article class="ts-faq">
+                <h5>Localisation</h5>
+                <div class="row">
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.pays, {label: 'Pays'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(userForm.ville, {label: 'Ville'}) }}
+                    </div>
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.adresse, {label: 'Adresse'}) }}
+                    </div>
+        
+                </div>
+            </article>
+        
+            <article class="ts-faq">
+                <h5>Réseaux sociaux</h5>
+                <div class="row">
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.facebook, {label: 'Facebook'}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(userForm.twitter, {label: 'Twitter'}) }}
+                    </div>
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.instagram, {label: 'Instagram'}) }}
+                    </div>
+        
+                </div>
+            </article>
+        
+            <article class="ts-faq">
+                <h5>Contact</h5>
+                <div class="row">
+        
+                    <div class="col-md-6">
+                        {{ form_row(userForm.telephone, {label: 'Téléphone'}) }}
+                    </div>
+        
+                </div>
+            </article>
+        
+            <div class="d-grid text-right">
+                <button class="btn btn-primary btn-lg" formnovalidate type="submit">
+                Enregistrer les modifications</button>
+            </div>
+        {{ form_end(userForm) }}
+    </div>
+</section>
+
+
+{% endblock %}

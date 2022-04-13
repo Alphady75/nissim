@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets | {{ projet.name }}{% endblock %}
+
+{% block body %}
+<!-- START PROJECT AREA BANNER -->
+<section class="projet-detail-area-banner" style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg') }})">
+	<div class="caption">
+		<div class="container">
+			<div class="col-12 text-center">
+				<h1 class="wow fadeInUp pb-4" data-wow-delay=".5s">{{ projet.name }}</h1>
+
+				<div class="btn-section pb-4">
+					<div class="row">
+						<div class="col-6 text-left text-sm-right">
+							<a href="" class="btn btn-home-border first wow fadeInUp" data-wow-delay=".7s">Savoir plus</a>
+						</div>
+						<div class="col-6 text-left">
+							<a href="{{ path('app_financement_projet', {'slug': projet.slug}) }}" class="btn second wow fadeInUp" data-wow-delay=".9s">Contact</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END PROJECT AREA BANNER -->
+
+<!-- START PROJECT AREA CONTENT -->
+<section class="projet-detail-content bg-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 p-2">
+				<div class="">
+					<!-- Nav pills -->
+					<ul class="nav nav-pills bg-primary">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="pill" href="#description">Fiche descriptive</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="pill" href="#analyse">Analyse de la fiabilité</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="pill" href="#reglement">Documents d'information réglementaire</a>
+						</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content bg-light pt-5">
+						<div class="tab-pane container active" id="description">
+							{{ projet.fDescriptive|raw }}
+                        </div>
+
+						<div class="tab-pane container fade" id="analyse">
+                            {{ projet.aFiabilite|raw }}
+                        </div>
+
+						<div class="tab-pane container fade" id="reglement">
+                            {{ projet.dInfReglementaire|raw }}
+                        </div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 p-2">
+				<div class="bg-light p-4 widget">
+					<h2 class="text-center">Financer ce projet</h2>
+
+					<p>Projet terminer</p>
+					<p>Fini le {{ projet.endDate|date('d/m/Y') }}</p>
+
+                    <a href="{{ path('app_financement_projet', {'slug': projet.slug}) }}">Financer maintenant</a>
+				</div>
+
+				<div class="bg-light p-4 widget">
+					<h2 class="text-center">Montant collecté</h2>
+
+					<h3>{{ projet.mCollecte|number_format(2, '.', ' ') }} $</h3>
+					<p>Type d'investissement:</p>
+					<p>Girardin Agricol</p>
+				</div>
+
+				<div class="bg-light p-4 widget">
+					<h2 class="text-center">Etat de la collecte</h2>
+
+					<p>Temps restant: Projet financé</p>
+					<p>Date de clôture: 18/03/2022</p>
+					<p>Seuil de succès minimum de collecte: 79448 $</p>
+				</div>
+
+				<div class="bg-primary text-light widget green-widget">
+					<span class="icon">
+						<i class="fa fa-lock"></i>
+					</span>
+
+                    {% if app.user %}
+                    
+                        <p>Vous êtes connecter</p>
+
+                        {% if is_granted('projet_edit', projet) %}
+
+                            <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Editer le projet</a>
+
+                        {% endif %}
+
+                    {% else %}
+                            
+                        <p>Vous devez être connecté pour voir tous les détails du projet</p>
+
+                    {% endif %}
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END PROJECT AREA CONTENT -->
+
+<section class="green-section p-0 m-0 bg-primary ">
+	<div class="m-0">
+		<div class="container">
+			<p>L'investissement partipatif présente un risque important de perte partialle ou totale du capital ainsi qu'un risque d'illiquidité.
+				<br>
+				Un crédit vous engage et doit être remboursé. N'empruntez pas au-delà de votre capacité de remboursement.</p>
+		</div>
+	</div>
+</section>
+
+<section class="dark-section bg-dark">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-3 col-md-6">
+				<div class="societie_img bg-white text-center">
+					<img src="{{ asset('themes/front/assets/img/logo.png') }}" class="w-50" alt="logo {{ appName }}">
+				</div>
+			</div>
+			<div class="col-lg-9 col-md-6">
+				<div class="about_societie">
+                    <p>La société Nissim, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row pt-md-5">
+			<div class="col-12 text-center">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore.</p>
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="col-12">
+				<div>
+					<a href="">Mention légales -
+					</a>
+					<a href="">GCU Les Entreprêteurs -</a>
+					<a href="">CGU Lemon Way -</a>
+					<a href="">Réclamations -</a>
+					<a href="">Politique de protection des données-Rapport annuels</a>
+				</div>
+
+				<div>
+					Ce site est protégé par reCAPTCHA et
+					<a href="">la politique de confidentialité</a>
+					et
+					<a href="">les conditions d'utilisation</a>
+					de Google s'appliquent.
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+{% endblock %}

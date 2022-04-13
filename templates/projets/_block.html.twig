@@ -1,0 +1,43 @@
+<div>
+	{% if projet.imageName %}
+		<div>
+			<a href="{{ path('app_projet_detail', {'slug': projet.slug}) }}" class="d-block">
+				<img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" class="img-fluid" alt="{{ projet.name }}"/>
+			</a>
+		</div>
+	{% endif %}
+	<div class="pricingTable text-left">
+
+		<div class="pricingTable-title">
+			<h3 class="title text-left">{{ projet.name }}</h3>
+		</div>
+		<ul class="pricing-content">
+			<li>
+				<i class="ti-check"></i>
+				Fini le
+				{{ projet.endDate|date('d/m/Y') }}
+			</li>
+		</ul>
+		<div class="pricingTable-value">
+			<h2 class="price-value">{{ projet.mCollecte|number_format(2, '.', ' ') }}
+				$</h2>
+			<span class="price-month">Montant colecté</span>
+		</div>
+		<a href="{{ path('app_projet_detail', {'slug': projet.slug}) }}" class="btn-home-border btn-sm">Financer</a>
+
+		{% if app.user %}
+
+			<div class="text-secnondary pt-4">
+
+				{% if is_granted('projet_edit', projet) %}
+			
+					<a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-sm btn-light border"><i class="fa fa-edit"></i> Editer</a>
+			
+				{% endif %}
+
+			</div>
+		{% endif %}
+		
+
+	</div>
+</div>

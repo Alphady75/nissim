@@ -1,0 +1,39 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Historique des financements{% endblock %}
+
+{% block body %}
+    <h1>Historique des financements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Projet</th>
+                <th>Montant</th>
+                <th>Created</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for financement in financements %}
+            <tr>
+                <td>{{ financement.id }}</td>
+                <td>{{ financement.projet.name }}</td>
+                <td>{{ financement.montant|number_format(2, '.', ' ') }} $</td>
+                <td>{{ financement.created ? financement.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_financement_crud_show', {'id': financement.id}) }}">Details</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun financement trouvés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(financements) }}
+
+{% endblock %}

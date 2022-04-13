@@ -1,44 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'auth.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<form method="post" class="login-form">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecter en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+	<h3 class="text-center mb-4">Connectez-vous?</h3>
 
-    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+	{% if error %}
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+	{% if app.user %}
+		<div class="mb-3">
+			Vous êtes connecter en tant que {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
+		</div>
+	{% endif %}
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Restez connecter
-        </label>
-    </div>
+	<form action="/login" method="post" class="login-form">
 
-    <a href="{{ path('app_forgot_password_request') }}">Mot de passe Oublié!</a>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Connexion
-    </button>
+		<div class="form-group">
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control rounded-left" placeholder="Adresse Email" autocomplete="email" required autofocus>
+		</div>
 
-    <div>
-        <a href="{{ path('app_register') }}">Créer un compte {{ appName }}</a> 100% gratuit!
-    </div>
+		<input type="hidden" name="_csrf_token"
+			value="{{ csrf_token('authenticate') }}"
+		>
 
-</form>
+		<div class="form-group d-flex">
+			<input type="password" name="password" id="inputPassword" class="form-control rounded-left" placeholder="Mot de passe" autocomplete="current-password" required>
+		</div>
+		<div class="form-group d-md-flex form-row">
+			<div class="col-6">
+				<label class="checkbox-wrap checkbox-primary" style="font-size: 14px;">
+					<input type="checkbox" name="_remember_me">
+					Restez connecter
+				</label>
+			</div>
+			<div class="col-6 text-md-right">
+				<a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+			</div>
+		</div>
+		<div class="form-group text-center">
+			<button type="submit" class="btn-home-border p-3 px-5 text-uppercase">Connexion</button>
+		</div>
+	</form>
+	
+{% endblock %}
+
+{% block link %}
+
+	<p class="font-weight-light text-center auth-link">
+		Je n'ai aucun compte Nissim!
+		<br>
+
+		<a href="{{ path('app_register') }}">Créer votre compte</a>
+	</p>
+
 {% endblock %}

@@ -57,11 +57,19 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
+            /*return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
-            );
+            );*/
+
+            $userRegisterdEmail = $user->getEmail();
+
+            $message = "Mail d\'activation de compte envoyer à l'adresse \"" . $userRegisterdEmail . "\", cliquer sur le lien pour activer votre compte";
+
+            $this->addFlash('warning', $message);
+
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [

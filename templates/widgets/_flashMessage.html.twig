@@ -1,12 +1,14 @@
 {% for type, messages in app.flashes %}
 	{% for message in messages %}
-		<div class="p-3 m-0 alert alert-{{ type }} bg-{{ type }} border-0 rounded-0 font-weight-light" role="alert">
-			<span class="badge border-light font-weight-bold">
+		<div class="p-3 m-0 alert alert-{{ type }} bg-{{ type }} border-0 font-weight-light" role="alert">
+			<span class="badge border-light font-weight-bold text-light">
 
 				{% if type == 'danger' %}
-					<i class="fa fa-warning"></i>
+					<i class="fa fa-exclamation-triangle"></i>
 				{% elseif type =='success' %}
 					<i class="fa fa-check"></i>
+				{% elseif type =='warning' %}
+					<i class="fa fa-exclamation-triangle"></i>
 				{% endif %}
 
 			</span>

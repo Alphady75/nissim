@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financement du projet | {{ projet.name }}{% endblock %}
+
+{% block body %}
+
+<section class="login-section bg-white justify-content-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+                {% if projet.imageName %}
+                <div>
+                    <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" class="img-fluid" alt="image"/>
+                </div>
+                {% endif %}
+                <h1 class="pt-3 pb-3">{{ projet.name }}</h1>
+                <hr>
+                <span>Montant Collecté:</span>
+                <h3>{{ projet.mCollecte|number_format(2, '.', ' ') }} $</h3>
+                <p>Date de fin: {{ projet.endDate|date('d/m/Y') }}</p>
+
+			</div>
+            <div class="col-md-4">
+                <div class="p-4 login-wrap ">
+                    <h3>Financer ce projet</h3>
+                    {{ include('financement/_form.html.twig') }}
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

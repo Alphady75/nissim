@@ -4,6 +4,242 @@
 
 {% block body %}
 
-<h1>Bienvenu sur {{ appName }}</h1>
+<!-- START HOME -->
+<section class="home-area bg-secondary">
+	<div class="text-left">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="content wow fadeInUp pb-4" data-wow-delay=".5s">
+						<h1>
+							Bienvenue sur
+							<span>{{ appName }},</span>
+
+							la prémière plateforme spécialisée dans la lévée des fonds pour le financement des maisons écologique et durable.
+						</h1>
+
+						<!-- Mobile Home Welcome image -->
+						<div class="imgbox wow fadeInRight pb-4 pt-md-4 pt-lg-0 d-block d-md-none" data-wow-delay=".3s" style="background-image: url({{ asset('themes/front/assets/img/welcome-img.png')}})"><!--<img src="">-->
+						
+                        </div>
+						<!-- Mobile Home Welcome image -->
+
+						<p>
+							Aujourd'hui, vous pouvez investir en toute sécurité d'une manière 100% digital !
+						</p>
+						<div class="medias">
+							<a href="">
+								<i class="ti-facebook f_facebook"></i>
+							</a>
+
+							<a href="">
+								<i class="ti-twitter f_twitter bg-transparent text-light"></i>
+							</ahref="">
+
+							<a href="">
+								<i class="ti-linkedin f_linkedin"></i>
+							</a>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Display none on mobile -->
+				<div class="col-md-6 d-none d-sm-block">
+					<div
+						class="imgbox wow fadeInRight pb-4 pt-md-4 pt-lg-0" data-wow-delay=".3s" style="background-image: url('{{ asset('themes/front/assets/img/welcome-img.png')}}');"><!--<img src="">-->
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END  HOME DESIGN -->
+
+<!-- START CALL ACTION SECTION -->
+<section class="call-action-area bg-dark text-center pt-4 pb-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mx-auto text-light">
+
+				<div class="wow fadeInUp">
+					<p>En fonction de vos objectifs personnels, vous pouvez investir et soutenir des projets à forte valeur ajoutée.
+						<br>
+						Vous souhaitez en savoir plus?</p>
+
+					<a href="{{ path('app_projets') }}" class="btn-home-border btn btn-lg">Voir les projets</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END CALL ACTION SECTION --->
+
+<!-- START ABOUT US -->
+<section class="about_us bg-secondary">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h2>A propos de nous</h2>
+					<div class="underline"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row align-items-center">
+			<div class="col-md-6 col-sm-12 col-xs-12">
+				<div class="about_img">
+					<img src="{{ asset('themes/front/assets/img/cabane-one-performance.jpg') }}" class="img-fluid" alt="about image">
+				</div>
+			</div>
+			<!--- END COL -->
+
+			<div class="col-md-6 col-sm-12 col-xs-12">
+				<div class="about-content wow fadeInUp" data-wow-delay=".5s">
+
+					<p>
+						<strong>Nissim,</strong>
+						la prémière plateforme spécialisée dans la levée de fond pour le financement des maisons écologique et durable.
+					</p>
+
+					<p>
+						Notre mission: Financer les constructions des maisons écologique et durable.
+					</p>
+
+					<p>
+						Adhérer à la dynamique NISSIM, c'est faire le choix de participer au développement d'un
+					</p>
+
+					<p>
+						Tout les processus de l'inscription et suivi des projets sont administrés par de professionnels partenaires,
+					</p>
+
+					<a href="#" class="btn btn-home-border">Savoir plus</a>
+				</div>
+			</div>
+			<!--- END COL -->
+
+		</div>
+		<!--- END ROW -->
+	</div>
+	<!--- END CONTAINER -->
+</section>
+<!-- END ABOUT US -->
+
+<!-- START FEATURE-->
+<section id="features" class="features section-padding bg-white">
+	<div class="container">
+		<div class="section-title text-left wow zoomIn">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h2>Nos points forts</h2>
+						<div class="underline"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row text-left">
+			<div class="col-6 col-md-4 col-lg-2 m-lg-auto p-1 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-check-box about_icon"></i>
+					<h4>Super Fast</h4>
+					<p>It is a long established fact
+					</p>
+				</div>
+			</div>
+			<!--- END COL -->
+
+			<div class="col-6 col-md-4 col-lg-2 p-1 m-lg-auto wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-rocket about_icon"></i>
+					<h4>Super Fast</h4>
+					<p>It is a long established fact</p>
+				</div>
+			</div>
+			<!--- END COL -->
+
+			<div class="col-6 col-md-4 col-lg-2 p-1 m-lg-auto wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-light-bulb about_icon"></i>
+					<h4>Super Fast</h4>
+					<p>It is a long established fact</p>
+				</div>
+			</div>
+			<!--- END COL -->
+			<div class="col-6 col-md-4 col-lg-2 p-1 m-lg-auto wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-light-bulb about_icon"></i>
+					<h4>Super Fast</h4>
+					<p>It is a long established fact</p>
+				</div>
+			</div>
+			<!--- END COL -->
+			<div class="col-6 col-md-4 col-lg-2 p-1 m-lg-auto wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-light-bulb about_icon"></i>
+					<h4>Super Fast</h4>
+					<p>It is a long established fact</p>
+				</div>
+			</div>
+			<!--- END COL -->
+
+		</div>
+		<!--- END ROW -->
+	</div>
+	<!--- END CONTAINER -->
+</section>
+<!-- END FEATURE -->
+
+<!-- START STEPS -->
+<section class="step-area bg-secondary text-center pt-5 pb-5">
+	<img src="{{ asset('themes/front/assets/img/section-step.png') }}" class="img-fluid">
+</section>
+<!-- END STEPS --->
+
+<!-- START CALL ACTION SECTION -->
+<section class="call-action-area bg-dark text-lg-center pt-5 pb-5 text-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="call-action-tel">
+					<div class="">
+						<h2 class="text-light text-center text-md-left pr-4">Prenez rendez-vous téléphonique</h2>
+					</div>
+					<div class="text-center text-md-left">
+						<a href="tel:09 00 00 00 00" class="btn-home-border btn">
+							<i class="fa fa-phone"></i>
+							09 00 00 00 00</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END CALL ACTION SECTION -->
+
+<!-- START PERFORMANCES SECTION -->
+<section class="performance-area" style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg')}})">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-7 col-lg-8 col-md-8">
+				<div class="performance-content performance-content-p">
+					<h2 class="wow fadeInUp" data-wow-delay=".2s">Les
+						<span>performances</span>
+						passées ne préjugent pas des
+						<span>performances</span>
+						futures</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END PERFORMANCES SECTION --->
+
 
 {% endblock %}

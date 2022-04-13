@@ -8,6 +8,8 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
+use function PHPUnit\Framework\isNull;
+
 /**
  * @method Projet|null find($id, $lockMode = null, $lockVersion = null)
  * @method Projet|null findOneBy(array $criteria, array $orderBy = null)
@@ -45,24 +47,25 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Projet[] Returns an array of Projet objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Permet de recupérer les projets par date, ordre décroissante
+    * @return Projet[] Returns an array of Projet objects
+    */
+    public function findByDateDesc($visible = null)
     {
+        if(isNull($visible)){
+            $visible = 1;
+        }
+
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('p.visible = :visible')
+            ->setParameter('visible', $visible)
+            ->orderBy('p.created', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
+    
     public function findOneBySomeField($value): ?Projet
     {
         return $this->createQueryBuilder('p')
@@ -72,5 +75,4 @@ class ProjetRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

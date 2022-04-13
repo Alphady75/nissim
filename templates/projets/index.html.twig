@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+
+{% block body %}
+
+<section class="project-list-area"style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg') }})">
+    <div class="caption">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="wow fadeInUp pb-4" data-wow-delay=".5s">Projets à financer</h1>
+                    <p class="wow fadeInUp pb-4" data-wow-delay=".7s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est veritatis sed aliquam nostrum ad perspiciatis nobis mollitia dignissimos totam hic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- START CALL ACTION SECTION -->
+<section class="call-action-area bg-dark text-lg-left pt-5 pb-5 text-light">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="call-action-tel">
+					<div class="">
+						<h2 class="text-light text-center text-md-left pr-4">Lorem ipsum dolor sit amet consectetur!</h2>
+					</div>
+
+                    {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <div class="text-left text-md-left">
+                                <a href="{{ path('app_admin_projets_crud_new') }}" class="btn-home-border btn">
+                                    Soumettre un projet</a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END CALL ACTION SECTION -->
+
+<!-- END CALL ACTION SECTION --->
+
+<!-- START PRICING  -->
+<section id="pricing" class="our_pricing section-padding bg-white">
+	<div class="container">
+
+        <div class="row mb-4">
+            {% for projet in projets %}
+                
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+
+                    {% include "projets/_block.html.twig" %}
+
+                </div>
+                <!-- END COL-->
+
+            {% else %}
+                <div class="col-md-12">
+                    <h5>Aucun projets</h5>
+                </div>
+            {% endfor %}
+		</div>
+		<!-- END ROW -->
+
+        <div class="row">
+            <div class="col-md-6 justify-content-center">
+                <div>
+                     {{ knp_pagination_render(projets) }}
+                </div>
+            </div>
+        </div>
+        
+	</div>
+	<!-- END CONTAINER  -->
+</section>
+<!-- END PRICING -->
+
+    
+{% endblock %}

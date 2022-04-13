@@ -1,0 +1,19 @@
+<nav style="padding: 15px 5%; background-color: white;">
+    <a href="{{ path('app_admin_dashboard') }}">Tableau de Bord</a>
+    <a href="{{ path('app_admin_projets_crud_index') }}">Projets</a>
+    <a href="{{ path('app_admin_users_crud_index') }}">Utilisateurs</a>
+    <a href="{{ path('app_admin_financement_crud_index') }}">Financements</a>
+
+    {% if app.user %}
+
+    <strong> {{ app.user.nom }} </strong>
+
+    <a href="{{ path('app_user_profile') }}">Profile</a>
+
+    <a href="{{ path('app_logout') }}">Déconnexion</a>
+
+    {% endif %}
+
+    <a href="{{ path('app_home') }}" target="_blanck">Voir le site</a>
+
+</nav>

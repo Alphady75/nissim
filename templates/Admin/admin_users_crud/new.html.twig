@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Nouvel Utilisateur{% endblock %}
+
+{% block class %}col-md-5 mx-auto{% endblock %}
+
+{% block body %}
+
+    <h1>Nouvel Utilisateur</h1>
+
+    {{ include('admin/admin_users_crud/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_users_crud_index') }}" class="d-block mt-4">Tout les utilisateurs</a>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+
+{% block body %}
+
+    <div class="form-head d-flex flex-wrap mb-sm-4 mb-3 align-items-center">
+        <div class="mr-auto  d-lg-block mb-3">
+            <h2 class="text-black mb-0 font-w700">Projets</h2>
+            <p class="mb-0">{{ appName }}
+                Tout les projets à financer
+            </p>
+        </div>
+        <a href="{{ path('app_admin_projets_crud_new')}}" class="btn btn-primary btn-rounded mb-3">
+            <i class="fa fa-plus mr-3"></i>Nouveau projet</a>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>EndDate</th>
+                <th>MCollecte</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+
+            {% if is_granted('projet_edit', projet) %}
+            
+                <tr>
+                    <td>{{ projet.id }}</td>
+                    <td>{{ projet.name }}</td>
+                    <td>{{ projet.slug }}</td>
+                    <td>{{ projet.endDate ? projet.endDate|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ projet.mCollecte }}</td>
+                    <td>{{ projet.created ? projet.created|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ projet.updated ? projet.updated|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}">Afficher</a>
+                        <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}">Editer</a>
+                    </td>
+                </tr>
+
+            {% endif %}
+
+        {% else %}
+            <tr>
+                <td colspan="11">Aucun projets trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(projets) }}
+
+{% endblock %}

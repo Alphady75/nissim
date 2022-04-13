@@ -1,0 +1,30 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Financement{% endblock %}
+
+{% block body %}
+    <h1>Financement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ financement.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ financement.montant }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ financement.created ? financement.created|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_financement_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_financement_crud_edit', {'id': financement.id}) }}">edit</a>
+
+    {{ include('admin_financement_crud/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financement index{% endblock %}
+
+{% block body %}
+    <h1>Financement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>Created</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for financement in financements %}
+            <tr>
+                <td>{{ financement.id }}</td>
+                <td>{{ financement.montant }}</td>
+                <td>{{ financement.created ? financement.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_financement_show', {'id': financement.id}) }}">show</a>
+                    <a href="{{ path('app_financement_edit', {'id': financement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_financement_new') }}">Create new</a>
+{% endblock %}

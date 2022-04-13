@@ -20,4 +20,6 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    FM\ElfinderBundle\FMElfinderBundle::class => ['all' => true],
+    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
 ];

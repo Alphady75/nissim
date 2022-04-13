@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financement reussi avec succès{% endblock %}
+
+{% block navbar %}
+	<br>
+{% endblock %}
+
+{% block footer %}
+    <br>
+{% endblock %}
+
+
+{% block body %}
+
+<!-- START FEATURE-->
+<section id="features" class="features bg-white">
+	<div class="container">
+		<div class="section-title text-left wow zoomIn">
+			<div class="row">
+				<div class="col-lg-6 mx-auto">
+					<span>Financement de projet</span>
+					<h2>Awesome Features in
+						<br>
+						our Template
+					</h2>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row text-left">
+
+			<div class="col-lg-6 mx-auto col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.3s" data-wow-offset="0">
+				<div class="single_about active_feature">
+					<i class="ti-check-box about_icon"></i>
+					<h4>Success</h4>
+					<p class="text-success">Financement éffectuer avec succès!</p>
+				</div>
+			</div>
+			<!--- END COL -->
+
+		</div>
+		<!--- END ROW -->
+	</div>
+	<!--- END CONTAINER -->
+
+	<div class="text-right wow fadeInRight p-3" data-wow-duration="5s" data-wow-delay="0.5s" data-wow-offset="0">
+
+        <a href="{{ path('app_home') }}" class="btn-home-border ">Retournez sur la page d'accueil</a>
+
+    </div>
+
+</section>
+<!-- END FEATURE -->
+
+    
+{% endblock %}

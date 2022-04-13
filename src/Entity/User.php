@@ -41,9 +41,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Financement::class)]
+    private $financements;
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();
+        $this->financements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,11 +162,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->email;
-    }
-
     public function getNom(): ?string
     {
         return $this->nom;
@@ -173,5 +172,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->nom = $nom;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Financement>
+     */
+    public function getFinancements(): Collection
+    {
+        return $this->financements;
+    }
+
+    public function addFinancement(Financement $financement): self
+    {
+        if (!$this->financements->contains($financement)) {
+            $this->financements[] = $financement;
+            $financement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFinancement(Financement $financement): self
+    {
+        if ($this->financements->removeElement($financement)) {
+            // set the owning side to null (unless already changed)
+            if ($financement->getUser() === $this) {
+                $financement->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
     }
 }

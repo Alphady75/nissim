@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace utilisateur{% endblock %}
+
+{% block body %}
+
+<section class="section-banner" style="background-image: url();">
+	<div class="caption">
+		<div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Espace utilisateur</h1>
+                </div>
+                <div class="col-md-6">
+                    <p>Bienvenue {{ app.user.nom }}</p>
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+
+<!-- START PROJECT AREA CONTENT -->
+<section class="bg-secondary mt-4 mb-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="">
+					<!-- Nav pills -->
+					<ul class="nav nav-pills bg-white">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="pill" href="#profile">Profil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="pill" href="#financement">Financements</a>
+						</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content bg-white pt-2">
+						<div class="tab-pane container active p-5" id="profile">
+							
+                            <div class="div">
+                                <p>Nom:
+                                    {{ user.nom }}</p>
+                                <p>Email:
+                                    {{ user.email }}</p>
+                                <p>Roles:
+                                    <br>
+                                    {% for role in user.roles %}
+                                        <span>
+                                            {% if role == "ROLE_USER"%}
+                                                Utilisateur
+                                            {% endif %}
+                                        </span>
+                                    {% endfor %}
+                                </p>
+                                <p>Status du compte:
+                                    {{ user.isVerified ? 'Actif' : 'Non activé' }}</p>
+                                <p>Profile mis à jour le:
+                                    {{ user.updated ? user.updated|date('d/m/Y à H:i:s') : '' }}</p>
+
+                                <a href="{{ path('app_user_edit_profile') }}" class="btn btn-light border">Editer votre profile</a>
+
+                            </div>
+                            
+						</div>
+
+						<div class="tab-pane container fade" id="financement">
+							<div class="p-5">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Montant</th>
+                                            <th>Effectuer le</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        {% for financement in financements %}
+                                            <tr class="col-md-4">
+                
+                                                <td>{{ financement.montant }}</td>
+                                                <td>{{ financement.created|date('d/m/Y') }}</td>
+                
+                                            </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="row">
+
+                                {{ knp_pagination_render(projets) }}
+
+                            </div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END PROJECT AREA CONTENT -->
+    
+{% endblock %}
