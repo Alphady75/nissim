@@ -1,6 +1,6 @@
 (function($) {
-    "use strict"
-	jQuery(document).on('ready', function() {
+    "use strict" 
+	jQuery(document).on('ready' , function() {
 		$(".summernote").summernote({
 			height: 190,
 			minHeight: null,

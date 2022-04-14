@@ -5,184 +5,143 @@
  var dzChartlist = function(){
 	
 	var screenWidth = $(window).width();
-	var donutChart2 = function(){
-		$("span.donut2").peity("donut", {
-			width: "113",
-			height: "113"
-		});
-	}
-	var chartBarRunning = function(){
-		
-		var options  = {
-			  series: [
-				{
-					name: 'Projects',
-					 data: [31, 40, 28, 51, 42, 109, 100]
-				}, 
-				{
-				  name: 'Projects',
-				   data: [11, 32, 45, 32, 34, 52, 41]
-				}, 
-				
-			],
-			chart: {
-			type: 'bar',
-			height: 370,
-			
-			
-			toolbar: {
-				show: false,
-			},
-			
-		},
-		plotOptions: {
-		  bar: {
-			horizontal: false,
-			endingShape:'rounded',
-			columnWidth: '45%',
-			
-		  },
-		},
-		colors:['#1E33F2', '#FF5045'],
-		dataLabels: {
-		  enabled: false,
-		},
-		markers: {
-			shape: "circle",
-		},
-		legend: {
-			show: false,
-			fontSize: '12px',
-			labels: {
-				colors: '#000000',
-				
-				},
-			markers: {
-			width: 18,
-			height: 18,
-			strokeWidth: 0,
-			strokeColor: '#fff',
-			fillColors: undefined,
-			radius: 15,	
-			}
-		},
-		stroke: {
-		  show: true,
-		  width: 6,
-		  colors: ['transparent']
-		},
-		grid: {
-			borderColor: '#eee',
-		},
-		xaxis: {
-			
-		  categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-		  labels: {
-		   style: {
-			  colors: '#787878',
-			  fontSize: '13px',
-			  fontFamily: 'poppins',
-			  fontWeight: 100,
-			  cssClass: 'apexcharts-xaxis-label',
-			},
-			
-		  },
-		  crosshairs: {
-		  show: false,
-		  }
-		},
-		yaxis: {
-			labels: {
-				offsetX:-16,
-			   style: {
-				  colors: '#787878',
-				  fontSize: '13px',
-				   fontFamily: 'poppins',
-				  fontWeight: 100,
-				  cssClass: 'apexcharts-xaxis-label',
-			  },
-		  },
-		},
-		fill: {
-		  opacity: 1,
-		  colors:['#1E33F2', '#FF5045'],
-		},
-		tooltip: {
-		  y: {
-			formatter: function (val) {
-			  return "$ " + val + " thousands"
-			}
-		  }
-		},
-		 responsive: [{
-			breakpoint: 575,
-			options: {
-				plotOptions: {
-				  bar: {
-					columnWidth: '80%',
-				  },
-				},
-				chart:{
-					height:250,
-				}
-			}
-		 }]
-		};
-
-		var chart = new ApexCharts(document.querySelector("#chartBarRunning"), options);
-		chart.render();
-			
-	}
-	var activityLine = function(){
-		  var options = {
+	var marketChart = function(){
+		 var options = {
           series: [{
           name: 'series1',
-          data: [20, 60, 30, 51, 42, 60, 50]
+          data: [200, 400, 300, 400, 200, 400, 200,300, 200, 300]
+        }, {
+          name: 'series2',
+          data: [500, 300, 400, 200, 500, 200, 400, 300, 500, 200]
         }],
           chart: {
-          height: 350,
+          height: 300,
           type: 'area',
-			toolbar: {
-				show: false,
-			},			
+		  toolbar:{
+			  show:false
+		  }
         },
+		colors:["#FFAB2D","#00ADA3"],
         dataLabels: {
           enabled: false
         },
         stroke: {
-          curve: 'smooth'
+          curve: 'smooth',
+		  width:3
         },
-        xaxis: {
-			categories: ["S", "M", "T", "W", "T", "F", "S"],
-			labels: {
-				  show: true,
-				  style:{
-					  colors: '#b9bbbd',
-				  },
-				 
-			},
-			
-        },
+		legend:{
+			show:false
+		},
+		grid:{
+			show:false,
+			strokeDashArray: 6,
+			borderColor: '#dadada',
+		},
 		yaxis: {
-			labels: {
-				show: true,
-				style:{
-				  colors: '#b9bbbd',
-				},
-				 
+		  labels: {
+			style: {
+				colors: '#B5B5C3',
+				fontSize: '12px',
+				fontFamily: 'Poppins',
+				fontWeight: 400
+				
 			},
-			
+			formatter: function (value) {
+			  return value + "k";
+			}
+		  },
+		},
+        xaxis: {
+          categories: ["Week 01","Week 02","Week 03","Week 04","Week 05","Week 06","Week 07","Week 08","Week 09","Week 10"],
+		  labels:{
+			  style: {
+				colors: '#B5B5C3',
+				fontSize: '12px',
+				fontFamily: 'Poppins',
+				fontWeight: 400
+				
+			},
+		  }
+        },
+		fill:{
+			type:'solid',
+			opacity:0.05
 		},
         tooltip: {
-          
+          x: {
+            format: 'dd/MM/yy HH:mm'
+          },
         },
-		colors:['#1E33F2'],
         };
 
-        var chart = new ApexCharts(document.querySelector("#activityLine"), options);
+        var chart = new ApexCharts(document.querySelector("#marketChart"), options);
         chart.render();
-      
 	}
+	var currentChart = function(){
+		 var options = {
+          series: [85, 60, 67, 50],
+          chart: {
+          height: 315,
+          type: 'radialBar',
+        },
+        plotOptions: {
+          radialBar: {
+				startAngle:-90,
+			   endAngle: 90,
+            dataLabels: {
+              name: {
+                fontSize: '22px',
+              },
+              value: {
+                fontSize: '16px',
+              },
+            }
+          },
+        },
+		stroke:{
+			 lineCap: 'round',
+		},
+        labels: ['Income', 'Income', 'Imcome', 'Income'],
+		 colors:['#ec8153', '#70b944','#498bd9','#6647bf'],
+        };
+
+        var chart = new ApexCharts(document.querySelector("#currentChart"), options);
+        chart.render();
+	}
+	
+	var recentContact = function(){
+		jQuery('.testimonial-one').owlCarousel({
+			loop:true,
+			autoplay:true,
+			margin:20,
+			nav:false,
+			rtl:true,
+			dots: false,
+			navText: ['', ''],
+			responsive:{
+				0:{
+					items:3
+				},
+				450:{
+					items:4
+				},
+				600:{
+					items:5
+				},	
+				991:{
+					items:5
+				},			
+				
+				1200:{
+					items:7
+				},
+				1601:{
+					items:5
+				}
+			}
+		})
+	}
+	
 	
 	/* Function ============ */
 		return {
@@ -191,9 +150,10 @@
 			
 			
 			load:function(){
-				chartBarRunning();
-				donutChart2();	
-				activityLine();
+					marketChart();
+					currentChart();
+					recentContact();
+					
 			},
 			
 			resize:function(){
@@ -203,6 +163,7 @@
 	}();
 
 	
+		
 	jQuery(window).on('load',function(){
 		setTimeout(function(){
 			dzChartlist.load();

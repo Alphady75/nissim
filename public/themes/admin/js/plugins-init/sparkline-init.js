@@ -1,5 +1,5 @@
 (function($) {
-  "use strict"
+    "use strict" 
    
  var dzSparkLine = function(){
     
@@ -36,7 +36,7 @@
 				barWidth: "4",
 				resize: !0,
 				barSpacing: "5",
-				barColor: "#1e33f2"
+				barColor: "#EB8153"
 			});
 		}
 	}
@@ -48,12 +48,12 @@
 				//width: "100%",
 				width: getSparkLineGraphBlockSize('#sparkline8'),
 				height: "50",
-				lineColor: "#1e33f2",
-				fillColor: "rgba(41, 51, 242, .5)",
-				minSpotColor: "#1e33f2",
-				maxSpotColor: "#1e33f2",
-				highlightLineColor: "#1e33f2",
-				highlightSpotColor: "#1e33f2",
+				lineColor: "#EB8153",
+				fillColor: "rgba(235, 129, 83, .5)",
+				minSpotColor: "#EB8153",
+				maxSpotColor: "#EB8153",
+				highlightLineColor: "#EB8153",
+				highlightSpotColor: "#EB8153",
 				
 			});
 		}
@@ -84,7 +84,7 @@
 				height: "200",
 				barWidth: 6,
 				barSpacing: 7,
-				barColor: "#864AD1"
+				barColor: "#6418C3"
 			});
 		}	
 	}
@@ -114,7 +114,7 @@
 					height: "200",
 					barWidth: 10,
 					barSpacing: 7, 
-					stackedBarColor: ['#1e33f2', '#864AD1', '#ff5c00']
+					stackedBarColor: ['#EB8153', '#6418C3', '#ff5c00']
 				});
 		}
 	}
@@ -127,7 +127,7 @@
 				height: "200",
 				barWidth: 10,
 				barSpacing: 7, 
-				colorMap: ['#43DC80', '#864AD1', '#ff5c00'], 
+				colorMap: ['#EB8153', '#6418C3', '#ff5c00'], 
 				negBarColor: '#ff5c00'
 			});
 		}
@@ -142,7 +142,7 @@
 				barWidth: "10",
 				resize: true,
 				// barSpacing: "7",
-				barColor: "#1e33f2", 
+				barColor: "#EB8153", 
 				width: '100%',
 				
 			});
@@ -155,8 +155,8 @@
 				type: 'line',
 				width: '100%',
 				height: '200', 
-				barColor: '#864AD1', 
-				colorMap: ['#864AD1', '#ff5c00']
+				barColor: '#6418C3', 
+				colorMap: ['#6418C3', '#ff5c00']
 			});
 		}
 		if(jQuery('#sparkline-composite-chart').length > 0 ){
@@ -166,8 +166,8 @@
 				width: '100%',
 				barWidth: 10,
 				barSpacing: 5,
-				barColor: '#1e33f2',
-				negBarColor: '#1e33f2',
+				barColor: '#34C73B',
+				negBarColor: '#34C73B',
 				composite: true,
 			});
 		}
@@ -180,7 +180,7 @@
 				type: "pie",
 				height: "100px",
 				resize: !0,
-				sliceColors: ["rgba(192, 10, 39, .5)", "rgba(0, 0, 128, .5)", "rgba(67, 220, 128, .5)"]
+				sliceColors: ["rgba(192, 10, 39, .5)", "rgba(0, 0, 128, .5)", "rgba(235, 129, 83, .5)"]
 			});
 		}	
 	}	
@@ -266,8 +266,7 @@
 	
 	}();
 
-
-		
+	
 	jQuery(window).on('load',function(){
 		setTimeout(function(){
 			dzSparkLine.resize();	

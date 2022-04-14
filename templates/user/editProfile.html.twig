@@ -1,10 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Edition de profil | {{ app.user.nom }}{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    {% include "user/_sectionBanner.html.twig" %}
+
+    <section class="bg-white pt-4 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <div class="bg-white p-4 m-4 form-input-border border text-center">
+
+                        <div class="icon bg-primary d-flex align-items-center justify-content-center">
+                            <span class="fa fa-user fa-3x"></span>
+                        </div>                        
+                        
+                        <h2 class="p-3 text-secondary text-center">Edition de profil | {{ app.user.nom }}</h2>
+                    
+                        {{ include('user/_form.html.twig', {'button_label': 'Enregistrer les Modifications'}) }}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

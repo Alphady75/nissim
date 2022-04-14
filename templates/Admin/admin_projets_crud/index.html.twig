@@ -2,6 +2,8 @@
 
 {% block title %}Projets{% endblock %}
 
+{% block pagetitle %}{% endblock %}
+
 {% block body %}
 
     <div class="form-head d-flex flex-wrap mb-sm-4 mb-3 align-items-center">
@@ -43,8 +45,9 @@
                     <td>{{ projet.created ? projet.created|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ projet.updated ? projet.updated|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
-                        <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}">Afficher</a>
-                        <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}">Editer</a>
+                        <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}" class="btn btn-secondary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+                        
+                        <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
                     </td>
                 </tr>
 

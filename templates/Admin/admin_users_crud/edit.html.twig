@@ -1,13 +1,29 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Edition du profil utilisateur{% endblock %}
+
+{% block pagetitle %}{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
 
-    {{ include('admin/admin_users_crud/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="row">
+		<div class="col-md-5 mx-auto">
 
-    <a href="{{ path('app_admin_users_crud_index') }}">back to list</a>
+			<h1 class="h2 pb-4 font-weight-bold">Edition de l'utilisateur</h1>
 
-    {{ include('admin/admin_users_crud/_delete_form.html.twig') }}
+			{{ include('admin/admin_users_crud/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+
+			<a href="{{ path('app_admin_users_crud_index') }}" class="d-block mt-4">Tout les utilisateurs</a>
+
+            <hr>
+
+            {% if is_granted('ROLE_ADMIN') %}
+
+                {{ include('admin/admin_users_crud/_delete_form.html.twig') }}
+                
+            {% endif %}
+		</div>
+	</div>
+
+
 {% endblock %}

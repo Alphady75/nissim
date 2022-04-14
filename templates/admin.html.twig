@@ -1,160 +1,167 @@
 <!DOCTYPE html>
-<html
-	lang="fr">
+<html lang="fr">
 
 
-	<!-- Mirrored from owlio.dexignzone.com/xhtml/form-wizard.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Sep 2021 14:05:39 GMT -->
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title>
-			{% block title %} {{ appName ~ " Administration"}} {% endblock %}
-		</title>
-		<!-- Favicon icon -->
-		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+<!-- Mirrored from d22roh5inpczgk.cloudfront.net/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Feb 2022 14:30:46 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+    <meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="description" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:title" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:description" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:image" content="../../zenix.dexignzone.com/xhtml/social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+    <title>{% block title %} {{ appName ~ " Administration"}} {% endblock %}</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('themes/front/assets/img/logo.png') }}">
+	<link rel="stylesheet" href="{{ asset('themes/admin/vendor/chartist/css/chartist.min.css') }}">
+    <link href="{{ asset('themes/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('themes/admin/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('themes/admin/css/style.css') }}" rel="stylesheet">
+	
+</head>
+<body>
 
-		<link rel="stylesheet" href="{{ asset('themes/admin/vendor/chartist/css/chartist.min.css') }}">
-		<link href="{{ asset('themes/admin/vendor/lightgallery/css/lightgallery.min.css') }}" rel="stylesheet">
-		<!-- Custom Stylesheet -->
-		<link href="{{ asset('themes/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('themes/admin/css/style.css') }}" rel="stylesheet">
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
 
-	</head>
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
 
-	<body>
-
-		<!--*******************
-				        Preloader start
-				    ********************-->
-		<div id="preloader">
-			<div class="sk-three-bounce">
-				<div class="sk-child sk-bounce1"></div>
-				<div class="sk-child sk-bounce2"></div>
-				<div class="sk-child sk-bounce3"></div>
-			</div>
-		</div>
-		<!--*******************
-				        Preloader end
-				    ********************-->
-
-
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+		{% include "widgets/Admin/_NavHeader.html.twig" %}
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+		
 		<!--**********************************
-				        Main wrapper start
-				    ***********************************-->
-		<div id="main-wrapper">
+            Chat box start
+        ***********************************-->
+		{% include "widgets/Admin/_ChatBox.html.twig" %}
+		<!--**********************************
+            Chat box End
+        ***********************************-->
+		<!--**********************************
+            Header start
+			***********************************-->
+		{% include "widgets/Admin/_Header.html.twig" %}
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
 
-			<!--**********************************
-						            Nav header start
-						        ***********************************-->
-			{% include "widgets/Admin/_NavHeader.html.twig" %}
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+		{% include "widgets/Admin/_SideBar.html.twig" %}
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+		
+		<!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+			<div class="container-fluid">
 
-			<!--**********************************
-						            Nav header end
-						        ***********************************-->
-
-			<!--**********************************
-						            Chat box start
-						        ***********************************-->
-			{% include "widgets/Admin/_ChatBox.html.twig" %}
-
-			<!--**********************************
-						            Chat box End
-						        ***********************************-->
-
-
-			<!--**********************************
-						            Header start
-						        ***********************************-->
-			{% include "widgets/Admin/_Header.html.twig" %}
-
-			<!--**********************************
-						            Header end ti-comment-alt
-						        ***********************************-->
-
-			<!--**********************************
-						            Sidebar start
-						        ***********************************-->
-			{% include "widgets/Admin/_Sidebar.html.twig" %}
-			<!--**********************************
-						            Sidebar end
-						        ***********************************-->
-
-			<!--**********************************
-						            Content body start
-						        ***********************************-->
-				<div class="content-body"> 
-					<div class="container">
-
-						<div class="row">
-
-							<div class="{% block class %}col-md-10 mx-auto{% endblock %}">
-
-								{% include "widgets/Admin/_Alert.html.twig" %}
-
-								{% block body %}{% endblock %}
-
-							</div>
-
+				{% block pagetitle %}
+					<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
+						<h2 class="font-w600 title mb-2 mr-auto ">Tableau de bord</h2>
+						<div class="weather-btn mb-2">
+							<span class="mr-3 font-w600 text-black"><i class="fa fa-cloud mr-2"></i>21</span>
+							<select class="form-control style-1 default-select  mr-3 ">
+								<option>Medan, IDN</option>
+								<option>Jakarta, IDN</option>
+								<option>Surabaya, IDN</option>
+							</select>
 						</div>
-
+						<a href="{{ path('app_admin_projets_crud_new') }}" class="btn btn-secondary mb-2"><i class="las la-plus scale5 mr-3"></i>Nouveau projet</a>
 					</div>
-				</div>
+				{% endblock %}
 
+				{% include "widgets/Admin/_Alert.html.twig" %}
 
+				{% block body %}{% endblock %}
 
 			</div>
-			<!--**********************************
-						            Content body end
-						        ***********************************-->
-
-
-			<!--**********************************
-						            Footer start
-						        ***********************************-->
-			<div class="footer">
-				<div class="copyright">
-					<p>Copyright © Designed &amp; Developed by
-						<a href="http://dexignzone.com/" target="_blank">DexignZone</a>
-						2021</p>
-				</div>
-			</div>
-			<!--**********************************
-						            Footer end
-						        ***********************************-->
-
-		<!--**********************************
-				           Support ticket button start
-				        ***********************************-->
-
-			<!--**********************************
-						           Support ticket button end
-						        ***********************************-->
-
-
 		</div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2021</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+		
+		
+		
+		
+		
 		<!--**********************************
-				        Main wrapper end
-				    ***********************************-->
+           Support ticket button start
+        ***********************************-->
 
-		<!--**********************************
-				        Scripts
-				    ***********************************-->
-		<!-- Required vendors --><script src="{{ asset('themes/admin/vendor/global/global.min.js') }}"> </script>
-		<script src="{{ asset('themes/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-		<script src="{{ asset('themes/admin/vendor/lightgallery/js/lightgallery-all.min.js') }}"></script>
-		<script src="{{ asset('themes/admin/vendor/peity/jquery.peity.min.js') }}"></script>
-		<!-- Dashboard 1 -->
-		<script src="{{ asset('themes/admin/js/dashboard/finance.js') }}"></script>
-		<!-- Apex Chart -->
-		<script src="{{ asset('themes/admin/vendor/apexchart/apexchart.js') }}"></script>
-
-		<script src="{{ asset('themes/admin/js/custom.min.js') }}"></script>
-		<script src="{{ asset('themes/admin/js/deznav-init.js') }}"></script>
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
 
 
-	</body>
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
 
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="{{ asset('themes/admin/vendor/global/global.min.js') }}"></script>
+	<script src="{{ asset('themes/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+	<script src="{{ asset('themes/admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+	
+	<!-- Chart piety plugin files -->
+    <script src="{{ asset('themes/admin/vendor/peity/jquery.peity.min.js') }}"></script>
+	
+	<!-- Apex Chart -->
+	<script src="{{ asset('themes/admin/vendor/apexchart/apexchart.js') }}"></script>
+	
+	<!-- Dashboard 1 -->
+	<script src="{{ asset('themes/admin/js/dashboard/dashboard-1.js') }}"></script>
+	
+	<script src="{{ asset('themes/admin/vendor/owl-carousel/owl.carousel.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/custom.min.js') }}"></script>
+	<script src="{{ asset('themes/admin/js/deznav-init.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/demo.js') }}"></script>
+    <script src="{{ asset('themes/admin/js/styleSwitcher.js') }}"></script>
 
-	<!-- Mirrored from owlio.dexignzone.com/xhtml/form-wizard.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Sep 2021 14:05:46 GMT -->
+</body>
+
+<!-- Mirrored from d22roh5inpczgk.cloudfront.net/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Feb 2022 14:33:38 GMT -->
 </html>

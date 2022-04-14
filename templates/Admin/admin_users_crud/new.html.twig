@@ -2,14 +2,21 @@
 
 {% block title %}Nouvel Utilisateur{% endblock %}
 
-{% block class %}col-md-5 mx-auto{% endblock %}
+{% block pagetitle %}{% endblock %}
 
 {% block body %}
 
-    <h1>Nouvel Utilisateur</h1>
+    <div class="row">
+        <div class="col-md-5 mx-auto">
 
-    {{ include('admin/admin_users_crud/_form.html.twig') }}
+            <h1 class="h2 pb-4 font-weight-bold">Créer un nouvel utilisateur</h1>
 
-    <a href="{{ path('app_admin_users_crud_index') }}" class="d-block mt-4">Tout les utilisateurs</a>
+            {{ include('admin/admin_users_crud/_form.html.twig') }}
+
+            <a href="{{ path('app_admin_users_crud_index') }}" class="d-block mt-4">Tout les utilisateurs</a>
+
+        </div>
+    </div>
+
 
 {% endblock %}

@@ -45,9 +45,9 @@
 						{
 							label: "My First dataset",
 							data:  [35, 18, 30, 35, 40, 20, 30, 25, 22, 20, 45, 35],
-							borderColor: 'rgba(67, 220, 128, 1)',
+							borderColor: 'rgba(235, 129, 83, 1)',
 							borderWidth: "0",
-							backgroundColor: 'rgba(67, 220, 128, 1)'
+							backgroundColor: 'rgba(235, 129, 83, 1)'
 							
 						}
 					]
@@ -875,12 +875,12 @@
 				labels: ["January", "February", "March", "April", "May", "June"],
 				datasets: [{
 					label: "Sales Stats",
-					backgroundColor: "rgba(134, 74, 209, .5)",
-					borderColor: '#864AD1',
-					pointBackgroundColor: '#864AD1',
-					pointBorderColor: '#864AD1',
-					pointHoverBackgroundColor: '#864AD1',
-					pointHoverBorderColor: '#864AD1',
+					backgroundColor: "rgba(100, 24, 195, .5)",
+					borderColor: '#6418C3',
+					pointBackgroundColor: '#6418C3',
+					pointBorderColor: '#6418C3',
+					pointHoverBackgroundColor: '#6418C3',
+					pointHoverBorderColor: '#6418C3',
 					data: [0, 18, 14, 24, 16, 30]
 				}]
 			},
@@ -1086,10 +1086,10 @@
 						{
 							label: "My First dataset",
 							data: [25, 60, 30, 71, 26, 85, 50],
-							borderColor: 'rgba(67, 220, 128, 1)',
+							borderColor: 'rgba(235, 129, 83, 1)',
 							borderWidth: "2",
-							backgroundColor: 'rgba(67, 220, 128, 1)',  
-							pointBackgroundColor: 'rgba(67, 220, 128, 1)', 
+							backgroundColor: 'rgba(235, 129, 83, 1)',  
+							pointBackgroundColor: 'rgba(235, 129, 83, 1)', 
 							pointRadius: 0
 						}
 					]
@@ -1152,10 +1152,10 @@
 
 					datasets: [{
 						label: "Sales Stats",
-						backgroundColor: ['#43dc80'],
-						borderColor: '#43dc80',
-						pointBackgroundColor: '#43dc80',
-						pointBorderColor: '#43dc80',
+						backgroundColor: ['#EB8153'],
+						borderColor: '#EB8153',
+						pointBackgroundColor: '#EB8153',
+						pointBorderColor: '#EB8153',
 						borderWidth:4,
 						borderRadius:10,
 						pointHoverBackgroundColor: '#1EAAE7',
@@ -1351,6 +1351,8 @@
 	
 	}();
 
+	
+		
 	jQuery(window).on('load',function(){
 		dzChartlist.load();
 	});

@@ -2526,3 +2526,27 @@ textarea.form-control{
 	color: #fff;
 	font-size: 50px;
 }
+.section-margin-top{
+	margin-top: 90px
+}
+.form-input-border input,
+.form-input-border textarea,
+.form-input-border select
+{
+	border: 1px solid rgb(231, 227, 227);
+}
+.form-input-border .icon{
+	width: 90px;
+	height: 90px;
+	line-height: 90px;
+	margin: 20px auto;
+	border-radius: 50%;
+	color: white;
+}
+.flash-alert{
+	position: fixed;
+	bottom: 10%;
+	left: 5%;
+	z-index: 3;
+	width: 50%;
+}

@@ -341,7 +341,7 @@
   $("#opening-dropdown-trigger").on('click',function(){
       $(".open-close-dropdown").select2('open');
   });
-  $("#closing-dropdown-trigger").on('click' , function(){
+  $("#closing-dropdown-trigger").on('click',function(){
       $(".open-close-dropdown").select2('close');
   });
 

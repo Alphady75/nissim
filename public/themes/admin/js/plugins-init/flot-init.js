@@ -1,5 +1,5 @@
 (function($) {
-    "use strict" 
+    "use strict"
 
 
  var dzChartlist = function(){
@@ -14,7 +14,7 @@
 				bars: {
 					show: true,
 					lineWidth: 0,
-					fillColor: '#1E33F2'
+					fillColor: '#EB8153'
 				}
 			},
 			grid: {
@@ -44,14 +44,14 @@
 			bars: {
 				show: true,
 				lineWidth: 0,
-				fillColor: '#1E33F2'
+				fillColor: '#EB8153'
 			}
 		}, {
 			data: [[1, 5], [3, 7], [5, 10], [7, 7], [9, 9], [11, 5], [13, 4], [15, 6]],
 			bars: {
 				show: true,
 				lineWidth: 0,
-				fillColor: '#864AD1'
+				fillColor: '#6418C3'
 			}
 		}], 
 		{
@@ -84,12 +84,12 @@
 			{
 				data: newCust,
 				label: 'New Customer',
-				color: '#1E33F2'
+				color: '#EB8153'
 			},
 			{
 				data: retCust,
 				label: 'Returning Customer',
-				color: '#864AD1'
+				color: '#6418C3'
 			}
 		],
 		{
@@ -142,12 +142,12 @@
 			{
 				data: newCust,
 				label: 'New Customer',
-				color: '#1E33F2'
+				color: '#EB8153'
 			},
 			{
 				data: retCust,
 				label: 'Returning Customer',
-				color: '#864AD1'
+				color: '#6418C3'
 			}
 		],
 		{
@@ -205,12 +205,12 @@
 			{
 				data: newCust2,
 				label: 'New Customer',
-				color: '#1E33F2'
+				color: '#EB8153'
 			},
 			{
 				data: retCust2,
 				label: 'Returning Customer',
-				color: '#864AD1'
+				color: '#6418C3'
 			}
 		],
 		{
@@ -263,12 +263,12 @@
 			{
 				data: newCust,
 				label: 'New Customer',
-				color: '#1E33F2'
+				color: '#EB8153'
 			},
 			{
 				data: retCust,
 				label: 'Returning Customer',
-				color: '#864AD1'
+				color: '#6418C3'
 			}
 		],
 		{
@@ -322,12 +322,12 @@
 			{
 				data: newCust,
 				label: 'New Customer',
-				color: '#1E33F2'
+				color: '#EB8153'
 			},
 			{
 				data: retCust,
 				label: 'Returning Customer',
-				color: '#864AD1'
+				color: '#6418C3'
 			}
 		],
 		{
@@ -380,7 +380,7 @@
 	var flotLine4 = function(){
 		var previousPoint = null;
 
-		$('#flotLine4, #flotLine4').on('bind','plothover', function (event, pos, item) {
+		$('#flotLine4, #flotLine4').bind('plothover', function (event, pos, item) {
 			$('#x').text(pos.x.toFixed(2));
 			$('#y').text(pos.y.toFixed(2));
 
@@ -400,7 +400,7 @@
 				previousPoint = null;
 			}
 		});
-		$('#flotLine4, #flotLine4').on('bind','plotclick', function (event, pos, item) {
+		$('#flotLine4, #flotLine4').bind('plotclick', function (event, pos, item) {
 			if (item) {
 				plot.highlight(item.series, item.datapoint);
 			}
@@ -446,7 +446,7 @@
 		var updateInterval = 1000;
 
 		var plot4 = $.plot('#flotRealtime1', [getRandomData()], {
-			colors: ['#1E33F2'],
+			colors: ['#EB8153'],
 			series: {
 				lines: {
 					show: true,
@@ -511,7 +511,7 @@
 		var updateInterval = 1000;
 		
 		var plot5 = $.plot('#flotRealtime2', [getRandomData()], {
-			colors: ['#1E33F2'],
+			colors: ['#EB8153'],
 			series: {
 				lines: {
 					show: true,
@@ -578,6 +578,7 @@
 	}
 
 }();
+
 
 	
 jQuery(window).on('load',function(){

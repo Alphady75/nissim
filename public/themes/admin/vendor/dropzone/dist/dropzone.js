@@ -1829,11 +1829,11 @@ function (_Emitter) {
                       return;
                     }
 
-                    file.fullPath = "".concat(path, "https://owlio.dexignzone.com/").concat(file.name);
+                    file.fullPath = "".concat(path, "/").concat(file.name);
                     return _this6.addFile(file);
                   });
                 } else if (entry.isDirectory) {
-                  _this6._addFilesFromDirectory(entry, "".concat(path, "https://owlio.dexignzone.com/").concat(entry.name));
+                  _this6._addFilesFromDirectory(entry, "".concat(path, "/").concat(entry.name));
                 }
               } // Recursively call readEntries() again, since browser only handle
               // the first 100 entries.

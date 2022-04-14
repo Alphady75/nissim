@@ -1,52 +1,77 @@
-<div class="deznav bg-white">
+<div class="deznav">
 	<div class="deznav-scroll">
-		<ul class="metismenu" id="menu">
-			<li>
-				<a href="{{ path('app_admin_dashboard') }}" class="bg-transparent text-dark">
-					<i class="fa fa-dashboard"></i>
-					<span class="nav-text">Tableau de bord</span>
+		<div class="main-profile">
+			<div class="image-bx">
+				<img src="{{ asset('img/user.jpg') }}" alt="{{ appName }} - logo">
+				<a href="javascript:void(0);">
+					<i class="fa fa-cog" aria-hidden="true"></i>
 				</a>
-			</li>
-
+			</div>
+			<h5 class="name">
+				<span class="font-w400">Salut,</span>
+				{{ app.user.nom }}</h5>
+			<p class="email">{{ app.user.email }}</p>
+		</div>
+		<ul class="metismenu" id="menu">
+			<li class="nav-label first">Menu principal</li>
 			<li>
 				<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-					<i class="flaticon-025-dashboard"></i>
+					<i class="flaticon-144-layout"></i>
+					<span class="nav-text">Tableau de bord</span>
+				</a>
+				<ul aria-expanded="false">
+					<li>
+						<a href="{{ path('app_admin_dashboard') }}">Par defaut</a>
+					</li>
+				</ul>
+
+			</li>
+			<li class="nav-label">Contenu</li>
+			<li>
+				<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+					<i class="flaticon-077-menu-1"></i>
 					<span class="nav-text">Projets</span>
 				</a>
 				<ul aria-expanded="false">
 					<li>
-						<a href="{{ path('app_admin_projets_crud_index') }}">Tout les projets</a>
+						<a href="{{ path('app_admin_projets_crud_index') }}">Liste</a>
 					</li>
 					<li>
-						<a href="{{ path('app_admin_projets_crud_new') }}">Ajouter un projet</a>
+						<a href="{{ path('app_admin_projets_crud_new') }}">Nouveau projet</a>
 					</li>
 				</ul>
 			</li>
 
 			<li>
 				<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-					<i class="flaticon-025-dashboard"></i>
+					<i class="flaticon-077-menu-1"></i>
 					<span class="nav-text">Utilisateurs</span>
 				</a>
 				<ul aria-expanded="false">
 					<li>
-						<a href="{{ path('app_admin_users_crud_index') }}">Tout les utilisateurs</a>
+						<a href="{{ path('app_admin_users_crud_index') }}">Liste</a>
 					</li>
 					<li>
-						<a href="{{ path('app_admin_users_crud_new') }}">Ajouter un utilisateur</a>
+						<a href="{{ path('app_admin_users_crud_new') }}">Nouvel utilisateurt</a>
 					</li>
 				</ul>
+			</li>
+			
+			<li>
+				<a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+					<i class="flaticon-381-settings-2"></i>
+					<span class="nav-text">Paramètre</span>
+				</a>
 			</li>
 		</ul>
 		<div class="copyright">
 			<p>
-				<strong>
-					{{ appName }}
-				</strong>
-				© 2022 All Rights Reserved</p>
-			<p class="fs-12">Made with by
+				<strong>{{ appName }} Admin Dashboard</strong>
+				© 2021 All Rights Reserved</p>
+			<p class="fs-12">Made with
 				<span class="heart"></span>
-				{{ appConcepteur }}</p>
+				by {{ appConcepteur }}</p>
 		</div>
 	</div>
 </div>
+

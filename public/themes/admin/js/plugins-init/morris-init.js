@@ -30,7 +30,8 @@
 				}],
 				resize: true,
 				redraw: true,
-				colors: ['#2DB3FF', 'rgb(41, 51, 242)', '#2BC155'],
+				colors: ['#EB8153', 'rgb(255, 92, 0)', '#6418C3'],
+				//responsive:true,
 				
 			});
 		}
@@ -85,7 +86,7 @@
 				ykeys: ['item1'],
 				labels: ['Item 1'],
 				gridLineColor: 'transparent',
-				lineColors: ['rgb(41, 51, 242)'], //here
+				lineColors: ['rgb(255, 62, 62)'], //here
 				lineWidth: 1,
 				hideHover: 'auto',
 				pointSize: 0,
@@ -141,12 +142,12 @@
 				labels: ['Phone', 'Windows', 'Mac'],
 				pointSize: 3,
 				fillOpacity: 0,
-				pointStrokeColors: ['#1e33f2', '#864AD1', '#43DC80'],
+				pointStrokeColors: ['#FF3E3E', '#6418C3', '#EB8153'],
 				behaveLikeLine: true,
 				gridLineColor: 'transparent',
 				lineWidth: 3,
 				hideHover: 'auto',
-				lineColors: ['rgb(41, 51, 242)', 'rgb(0, 171, 197)', '#43DC80'],
+				lineColors: ['rgb(255, 62, 62)', 'rgb(0, 171, 197)', '#EB8153'],
 				resize: true
 
 			});
@@ -197,7 +198,7 @@
 					xkey: 'y',
 					ykeys: ['a', 'b', 'c'],
 					labels: ['A', 'B', 'C'],
-					barColors: ['#1e33f2', '#864AD1', '#ff9f00'],
+					barColors: ['#EB8153', '#6418C3', '#ff9f00'],
 					hideHover: 'auto',
 					gridLineColor: 'transparent',
 					resize: true,
@@ -274,7 +275,7 @@
 				xkey: 'y',
 				ykeys: ['a', 'b'],
 				labels: ['A', 'B'],
-				barColors: ['#1e33f2', "#F1F3F7"],
+				barColors: ['#EB8153', "#F1F3F7"],
 				hideHover: 'auto',
 				gridLineColor: 'transparent',
 				resize: true,
@@ -331,7 +332,7 @@
 
 
 				],
-				lineColors: ['#43DC80', 'rgb(41, 51, 242)', 'rgb(255, 92, 0)'],
+				lineColors: ['#EB8153', 'rgb(16, 202, 147)', 'rgb(255, 92, 0)'],
 				xkey: 'period',
 				ykeys: ['smartphone', 'windows', 'mac'],
 				labels: ['Phone', 'Windows', 'Mac'],
@@ -438,19 +439,19 @@
 		
 	}();
 
-	jQuery(document).on('ready', function(){
+	jQuery(document).on('ready' , function(){
 		dzMorris.init();
-		//dzMorris.resize();
+		dzMorris.resize();
 	
 	});
 		
 	jQuery(window).on('load',function(){
-		//dzMorris.init();
+		dzMorris.init();
 	});
 		
 	jQuery( window ).resize(function() {
-		//dzMorris.resize();
-		//dzMorris.init();
+		dzMorris.resize();
+		dzMorris.init();
 	});
    
 })(jQuery);

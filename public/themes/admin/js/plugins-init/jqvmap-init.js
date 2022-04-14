@@ -1,5 +1,5 @@
 (function($) {
-    "use strict" 
+     "use strict"
 
 
  var dzVectorMap = function(){
@@ -94,6 +94,7 @@
 	
 	}();
 
+	
 		
 	jQuery(window).on('load',function(){
 		setTimeout(function(){

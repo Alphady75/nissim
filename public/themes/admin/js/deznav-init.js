@@ -24,7 +24,7 @@ function getUrlParams(dParam)
 	var direction =  getUrlParams('dir');
 	
 	dezSettingsOptions = {
-			typography: "cairo",
+		typography: "poppins",
 			version: "light",
 			layout: "vertical",
 			headerBg: "color_1",
