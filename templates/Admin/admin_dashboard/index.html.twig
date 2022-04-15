@@ -8,7 +8,7 @@
 	<div class="col-xl-3 col-sm-6 m-t35">
 		<div class="card card-coin">
 			<div class="card-body text-center text-center">
-				<svg class="mb-3 feather feather-users bg-light rounded-circle" id="icon-customers" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<svg class="mb-3 feather feather-users" id="icon-customers" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
 					<circle cx="12" cy="7" r="4"></circle>
 				</svg>
@@ -38,9 +38,8 @@
 	<div class="col-xl-3 col-sm-6 m-t35">
 		<div class="card card-coin">
 			<div class="card-body text-center">
-				<svg class="mb-3 feather feather-users" id="icon-customers" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-					<circle cx="12" cy="7" r="4"></circle>
+				<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder">
+					<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
 				</svg>
 				<h2 class="text-black mb-2 font-w600">{{ (projets|length)|number_format(2, '.', ' ') }}</h2>
 				<p class="mb-0 fs-14">
@@ -749,7 +748,7 @@
 						<div class="testimonial-one px-4 owl-right-nav owl-carousel owl-loaded owl-drag">
 							<div class="items">
 								<div class="text-center">
-									<img class="mb-3 rounded" src="images/contacts/Untitled-1.jpg" alt="">
+									<img class="mb-3 rounded" src="{{ asset('img/user.jpg') }}" alt="">
 									<h5 class="mb-0">
 										<a class="text-black" href="javascript:void(0);">Samuel</a>
 									</h5>
@@ -758,7 +757,7 @@
 							</div>
 							<div class="items">
 								<div class="text-center">
-									<img class="mb-3 rounded" src="images/contacts/Untitled-2.jpg" alt="">
+									<img class="mb-3 rounded" src="{{ asset('img/user.jpg') }}" alt="">
 									<h5 class="mb-0">
 										<a class="text-black" href="javascript:void(0);">Cindy</a>
 									</h5>
@@ -767,7 +766,7 @@
 							</div>
 							<div class="items">
 								<div class="text-center">
-									<img class="mb-3 rounded" src="images/contacts/Untitled-3.jpg" alt="">
+									<img class="mb-3 rounded" src="{{ asset('img/user.jpg') }}" alt="">
 									<h5 class="mb-0">
 										<a class="text-black" href="javascript:void(0);">David</a>
 									</h5>
@@ -776,7 +775,7 @@
 							</div>
 							<div class="items">
 								<div class="text-center">
-									<img class="mb-3 rounded" src="images/contacts/Untitled-4.jpg" alt="">
+									<img class="mb-3 rounded" src="{{ asset('img/user.jpg') }}" alt="">
 									<h5 class="mb-0">
 										<a class="text-black" href="javascript:void(0);">Martha</a>
 									</h5>
@@ -785,7 +784,7 @@
 							</div>
 							<div class="items">
 								<div class="text-center">
-									<img class="mb-3 rounded" src="images/contacts/Untitled-5.jpg" alt="">
+									<img class="mb-3 rounded" src="{{ asset('img/user.jpg') }}" alt="">
 									<h5 class="mb-0">
 										<a class="text-black" href="javascript:void(0);">Olivia</a>
 									</h5>

@@ -18,48 +18,59 @@
     </div>
 
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>EndDate</th>
-                <th>MCollecte</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for projet in projets %}
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Slug</th>
+                        <th>Montant collecté</th>
+                        <th>Créer le</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for projet in projets %}
+        
+                    {% if is_granted('projet_edit', projet) %}
+                    
+                        <tr>
+                            <td>{{ projet.id }}</td>
+                            <td>{{ projet.name }}
+                                <br>
+                                <span class="small mt-2"><i class="fa fa-calendar"></i> Date fin: {{ projet.endDate ? projet.endDate|date('d/m/Y H:i:s') : '' }}</span>
+                            </td>
+                            <td>
+                            {% if projet.imageName %}
 
-            {% if is_granted('projet_edit', projet) %}
-            
-                <tr>
-                    <td>{{ projet.id }}</td>
-                    <td>{{ projet.name }}</td>
-                    <td>{{ projet.slug }}</td>
-                    <td>{{ projet.endDate ? projet.endDate|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ projet.mCollecte }}</td>
-                    <td>{{ projet.created ? projet.created|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ projet.updated ? projet.updated|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>
-                        <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}" class="btn btn-secondary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
-                        
-                        <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                    </td>
-                </tr>
+                                <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" width="100" height="100" alt="{{ projet.name }}"/>
 
-            {% endif %}
-
-        {% else %}
-            <tr>
-                <td colspan="11">Aucun projets trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                            {% endif %}
+                            </td>
+                            <td>{{ projet.slug }}</td>
+                            <td><strong class="text-primary">{{ projet.mCollecte|number_format(2, '.', ' ') }} $</strong></td>
+                            <td>{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}" class="btn btn-secondary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+                                
+                                <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
+        
+                    {% endif %}
+        
+                {% else %}
+                    <tr>
+                        <td colspan="11">Aucun projets trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     {{ knp_pagination_render(projets) }}
 
