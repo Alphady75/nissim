@@ -1,7 +1,7 @@
 {% if is_granted('projet_edit', projet) %}
     <form class="d-inline" method="post" action="{{ path('app_admin_projets_crud_delete', {'id': projet.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id) }}">
-        <button class="btn btn-danger">Supprimer</button>
+        <button class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</button>
     </form>
 {% endif %}
 

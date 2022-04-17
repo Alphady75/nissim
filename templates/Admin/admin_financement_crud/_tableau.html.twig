@@ -1,0 +1,52 @@
+<div class="table-responsive">
+    <table class="table shadow-hover card-table border-no tbl-btn short-one">
+        <tbody>
+            <tr class="text-dark">
+                <th>#</th>
+                <th>#ID</th>
+                <th>DATE</th>
+                <th>#</th>
+                <th>PROVENANCE</th>
+                <th>#</th>
+                <th>DESTINATION</th>
+                <th>MONTANT</th>
+                <th>STATUT</th>
+                <th>ACTION</th>
+            </tr>
+            {% for financement in financements %}
+                <tr>
+                    <td>
+                        <span>
+                            <i class="fa fa-2x fa-{{ financement.statut == 1 ? "check-circle text-success" : "exclamation-triangle text-danger"}}" ></i>
+                        </span>
+                    </td>
+                    <td><span class="text-black">{{ financement.id }}</span></td>
+                    <td>
+                        <span class="text-black">{{ financement.created|date('d/m/Y') }}</span>
+                    </td>
+                    <td>
+                        <span class="shadow text-light bg-primary rounded-circle d-block font-weight-bold text-center" style="width: 35px;height:35px;line-height:35px;border-radius:50%;font-size:1rem;">
+                            {{ financement.user.nom|u.truncate(1) }}
+                        </span>
+                    </td>
+                    <td class="wspace-no">
+                        <span class="font-w600 text-black">{{ financement.user.nom }}</span>
+                    </td>
+                    <td><i class="fa fa-credit-card"></i></td>
+                    <td><span class="font-w100">{{ financement.projet.name|u.truncate(35, '...') }}</span></td>
+                    <td>
+                        <span class="font-w600 text-black">{{ financement.montant|number_format(2, '.', ' ') }}$</span>
+                    </td>
+                    <td>
+                        <span class="badge text-uppercase badge-sm badge-outline-{{ financement.statut == 1 ? 'success' : 'danger' }}">
+                            {{ financement.statut == 1 ? 'Reussie' : 'Echouée' }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a class=""  href="{{ path('app_admin_financement_crud_show', {'id': financement.id}) }}"><i class="fa fa-list-alt"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

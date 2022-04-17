@@ -22,7 +22,7 @@ class ProjetsController extends AbstractController
         $projets = $paginator->paginate(
             $projetRepository->findByDateDesc(),
             $request->query->getInt('page', 1),
-            8
+            12
         );
 
         return $this->render('projets/index.html.twig', [

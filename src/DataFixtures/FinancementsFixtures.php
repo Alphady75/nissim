@@ -20,6 +20,7 @@ class FinancementsFixtures extends Fixture implements DependentFixtureInterface
             
             $financement = new Financement();
             $financement->setMontant($faker->numberBetween(100, 1000));
+            $financement->setStatut($faker->numberBetween(0, 1));
             $financement->setUser($user);
             $manager->persist($financement);
 

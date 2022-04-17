@@ -1,32 +1,108 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Financement{% endblock %}
+{% block title %}Transaction n°{{ financement.id }}{% endblock %}
 
-{% block pagetitle %}{% endblock %}
+{% block pagetitle %}
+    <div class="form-head d-flex flex-wrap mb-sm-4 mb-3 align-items-center">
+        <div class="mr-auto d-lg-block mb-3">
+            <h2 class="text-black mb-0 font-w700">Transaction financières</h2>
+            <p class="mb-0">
+                Transaction n°{{ financement.id }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block colclass %}col-md-7 mx-auto{% endblock %}
 
 {% block body %}
-    <h1>Financement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ financement.id }}</td>
-            </tr>
-            <tr>
-                <th>Montant</th>
-                <td>{{ financement.montant }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ financement.created ? financement.created|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table bg-white">
+    <tbody>
+        <tr>
+            <th colspan="2" class="font-weight-normal">
+                Information sur la transaction
+            </th>
+        </tr>
+        <tr>
+            <th>#ID</th>
+            <td>{{ financement.id }}</td>
+        </tr>
+        <tr>
+            <th class="font-weight-normal"><i class="fa fa-calendar"></i> Date de Transaction</th>
+            <td>{{ financement.created ? financement.created|date('d/m/Y à H:i:s') : '' }}</td>
+        </tr>
+        <tr class="border border-{{ financement.statut == 1 ? 'success' : 'danger' }}">
+            <th class="font-weight-normal">Statut</th>
+            <td>
+                <span class="badge text-uppercase badge-sm badge-outline-{{ financement.statut == 1 ? 'success' : 'danger' }}">
+                    {{ financement.statut == 1 ? 'Reussie' : 'Echouée' }}
+                </span>
+            </td>
+        </tr>
+        <tr class="border border-success">
+            <th><i class="fa fa-user"></i> Provenance</th>
+            <td>
+                <div class="media">
+                    <span class="shadow mr-3 text-light bg-primary rounded-circle d-block font-weight-bold text-center" style="width: 35px;height:35px;line-height:35px;border-radius:50%;font-size:1rem;">
+                            {{ financement.user.nom|u.truncate(1) }}
+                    </span>
+                    <div class="media-body">
+                        <strong class="d-block">{{ financement.user.nom }}</strong>
+                        <a href="mailto:{{ financement.user.email }}">{{ financement.user.email }}</a>
+                    </div>
+                </div>
+                
+            </td>
+        </tr>
+        <tr>
+           <th colspan="2" class="font-weight-normal">
+               Informations sur le projet financé
+           </th> 
+        </tr>
+        <tr class="border border-success">
+            <th>Destination</th>
+            <td><h4 class="text-dark" style="font-size: 18px;">{{ projet.name }}</h4></td>
+        </tr>
+        {% if projet.imageName %}
+        <tr>
+            <th class="font-weight-normal">Image</th>
+            <td>
+                <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" class="img-fluid card-img" alt="{{ projet.name }}"/>
+            </td> 
+        </tr>
+        {% endif %}
+        <tr>
+            <th class="font-weight-normal">Transaction</th>
+            <td>
+                <div class="row">
+                    <div class="col-6">
+                        <p>
+                            <i class="fa fa-credit-card"></i> Montant Financé
+                        </p>
+                        <strong class="text-primary font-weight-bold h3">{{ financement.montant|number_format(0, '', ' ') }} $</strong>
+                    </div>
+                    <div class="col-6">
+                        <p><i class="fa fa-credit-card"></i> Montant collecté</p>
+                        <span class="text-primary font-weight-bold h3">{{ projet.mCollecte|number_format(0, '', ' ') }} $</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th class="font-weight-normal"><i class="fa fa-calendar"></i> Date Fin</th>
+            <td>{{ projet.endDate|date('d/m/Y') }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_admin_financement_crud_index') }}">back to list</a>
+<a href="{{ path('app_admin_financement_crud_index') }}" class="btn btn-primary">
+    Toute les transactions
+</a>
 
-    <a href="{{ path('app_admin_financement_crud_edit', {'id': financement.id}) }}">edit</a>
+{{ include('admin/admin_financement_crud/_delete_form.html.twig') }}
 
-    {{ include('admin_financement_crud/_delete_form.html.twig') }}
+<br class="m-4">
+<br><br>
+
 {% endblock %}

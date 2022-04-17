@@ -1,0 +1,93 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Votre profil {{ app.user.nom }}{% endblock %}
+
+{% block pagetitle %}{% endblock %}
+
+{% block body %}
+
+
+<!-- row -->
+{% include "admin/admin_espace/_coverPicture.html.twig" %}
+
+<div class="row">
+	<div class="col-xl-10 mx-auto">
+		<div class="card">
+			<div class="card-body">
+				<div class="profile-tab">
+					<div class="custom-tab-1">
+						<ul class="nav nav-tabs border-0">
+							<li class="nav-item">
+								<a href="#my-projets" data-toggle="tab" class="nav-link active show">Projets <span class="badge badge-outline-primary">{{ app.user.projets|length }}</span> </a>
+							</li>
+							<li class="nav-item">
+								<a href="#profil" data-toggle="tab" class="nav-link">Profil</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="my-projets" class="tab-pane fade active show">
+                                {% for projet in projets %}
+                                    <div class="my-projets-content pt-4">
+                                        <div class="profile-uoloaded-post border-bottom-1 pb-5">
+                                            {% if projet.imageName %}
+                                                <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" alt="{{ projet.name }}" class="img-fluid w-100">
+                                            {% endif %}
+                                            <a class="post-title" href="{{ path('app_projet_detail', {'slug': projet.slug}) }}" target="_blanck">
+                                                <h3 class="text-black" style="font-size: 18px!important">{{ projet.name }}</h3>
+                                            </a>
+                                            <p><i class="fa fa-calendar"></i> Termine le {{ projet.endDate|date('d/m/Y') }}</p>
+                                            <p>Motant collecté: <span class="text-primary font-weight-bold">{{ projet.mCollecte|number_format(0, '.', ' ') }} <i class="fa fa-euro-sign"></i></span></p>
+                                            <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-secondary mr-2">
+                                                <span class="mr-2">
+                                                    <i class="fa fa-edit"></i>
+                                                </span>Editer</a>
+                                            <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}" class="btn btn-primary">
+                                                <span class="mr-2">
+                                                    <i class="fa fa-fast-forward"></i>
+                                                </span>Voir le projet</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                {{ knp_pagination_render(projets) }}
+
+							</div>
+							<div id="profil" class="tab-pane fade">
+								<div class="profile-about-me">
+									<div class="pt-4 border-bottom-1 pb-3">
+										<table class="table table-borderless">
+											<tbody>
+												<tr>
+													<th>Nom complet</th>
+													<td>{{ app.user.nom }}</td>
+												</tr>
+												<tr>
+													<th>Email</th>
+													<td>{{ app.user.email }}</td>
+												</tr>
+												<tr>
+													<th>Rôle</th>
+													<td><span class="badge badge-outline-success">{{ is_granted("ROLE_ADMIN") ? 'Administrateur' : '' }}</span></td>
+												</tr>
+												<tr>
+													<th>Staut du compte</th>
+													<td>
+														<span class="badge badge-outline-{{ app.user.isVerified == 1 ? "success" : "danger" }}">{{ app.user.isVerified == 1 ? "Actif" : "Bloqué" }}</span>
+														<br>
+														<a href="" class="btn btn-primary mt-4">Editer votre profil</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

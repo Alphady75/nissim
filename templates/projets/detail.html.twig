@@ -99,7 +99,7 @@
 
                         {% if is_granted('projet_edit', projet) %}
 
-                            <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">Editer le projet</a>
+                            <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}">Editer le projet</a>
 
                         {% endif %}
 

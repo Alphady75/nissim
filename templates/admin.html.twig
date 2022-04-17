@@ -83,24 +83,24 @@
         <div class="content-body">
 			<div class="container-fluid">
 
-				{% block pagetitle %}
-					<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
-						<h2 class="font-w600 title mb-2 mr-auto ">Tableau de bord</h2>
-						<div class="weather-btn mb-2">
-							<span class="mr-3 font-w600 text-black"><i class="fa fa-cloud mr-2"></i>21</span>
-							<select class="form-control style-1 default-select  mr-3 ">
-								<option>Medan, IDN</option>
-								<option>Jakarta, IDN</option>
-								<option>Surabaya, IDN</option>
-							</select>
-						</div>
-						<a href="{{ path('app_admin_projets_crud_new') }}" class="btn btn-secondary mb-2"><i class="las la-plus scale5 mr-3"></i>Nouveau projet</a>
-					</div>
-				{% endblock %}
+                <div class="row">
+                    <div class="{% block colclass %}col-md-11 mx-auto{% endblock %}">
 
-				{% include "widgets/Admin/_Alert.html.twig" %}
+                        {% block pagetitle %}
+                            <div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
+                                <h2 class="font-w600 title mb-2 mr-auto ">Tableau de bord</h2>
+                                <a href="{{ path('app_admin_projets_crud_new') }}" class="btn btn-primary mb-2 mr-3"><i class="fa fa-folder scale5 mr-3"></i>Nouveau projet</a>
+                                <a href="{{ path('app_admin_users_crud_new') }}" class="btn btn-secondary mb-2"><i class="fa fa-user-plus scale5 mr-3"></i>Nouvel Utilisateur</a>
+                            </div>
+                        {% endblock %}
+        
+                        {% include "widgets/Admin/_Alert.html.twig" %}
+        
+                        {% block body %}{% endblock %}
 
-				{% block body %}{% endblock %}
+                    </div>
+                </div>
+
 
 			</div>
 		</div>

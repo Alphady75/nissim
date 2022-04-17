@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -19,7 +19,7 @@ class ProjetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
+            ->add('name', TextareaType::class, [
                 'label' => 'Titre',
                 'attr'  =>  ['placeholder' => 'Tritre du projet...'],
                 'constraints' => [
@@ -56,9 +56,9 @@ class ProjetType extends AbstractType
                     ])
                 ],
             ])
-            ->add('mCollecte', IntegerType::class, [
+            /*->add('mCollecte', IntegerType::class, [
                 'label' =>  'Montant Collecter'
-            ])
+            ])*/
             ->add('visible', CheckboxType::class, [
                 'label' =>  'Visible sur le site'
             ])

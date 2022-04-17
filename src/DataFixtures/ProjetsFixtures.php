@@ -24,7 +24,7 @@ class ProjetsFixtures extends Fixture implements DependentFixtureInterface
             $projet->setSlug('lorem-ipsum-dolor-sit-amet-consectetur-' . 'slug-projet-' . $nbProjet);
             $projet->setUser($user);
             $projet->setVisible($faker->numberBetween(0, 1));
-            $projet->setFDescriptive($faker->realText(1000));
+            $projet->setFDescriptive($faker->realText(400));
             $projet->setAFiabilite($faker->realText(1000));
             $projet->setDInfReglementaire($faker->realText(1000));
             $projet->setMCollecte($faker->numberBetween(10000, 100000));

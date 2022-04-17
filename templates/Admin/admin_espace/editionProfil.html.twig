@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edition de profil |
+	{{ app.user.nom }}
+{% endblock %}
+
+{% block pagetitle %}{% endblock %}
+
+{% block body %}
+
+	{% include "admin/admin_espace/_coverPicture.html.twig" %}
+
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<div class="rounded bg-white p-4">
+				<h2 class="p-2" style="font-size: 18px;color: black;">Edition de profil {{ app.user.nom }}</h2>
+
+				{{ include('user/_form.html.twig', {'button_label': 'Enregistrer les Modifications'}) }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

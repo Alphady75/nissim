@@ -29,6 +29,9 @@ class Financement
     #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'financements')]
     private $projet;
 
+    #[ORM\Column(type: 'boolean')]
+    private $statut;
+
     public function __construct()
     {
         $this->project = new ArrayCollection();
@@ -71,6 +74,18 @@ class Financement
     public function setProjet(?Projet $projet): self
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Projet;
+use App\Entity\ProjetSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -74,5 +75,27 @@ class ProjetRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param ProjetSearch $search
+     * @return Projet[]
+     */
+    public function findSearch(ProjetSearch $search): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p')
+            ->orderBy('p.created', 'DESC')
+        ;
+
+        if(!empty($search->q)){
+            $query = $query
+            ->andWhere('p.name LIKE :q')
+            ->setParameter('q', "%{$search->q}%");
+        }
+
+        return $query->getQuery()->getResult();
     }
 }

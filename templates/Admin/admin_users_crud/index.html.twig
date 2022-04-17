@@ -1,60 +1,124 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Utilisateurs{% endblock %}
+{% block title %}Utilisateurs inscrits{% endblock %}
+
+{% block colclass %}col-md-12{% endblock %}
+
+{% block pagetitle %}
+<div class="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center">
+	<h2 class="font-w600 title mb-2 mr-auto ">Utilisateurs</h2>
+	<a href="{{ path('app_admin_users_crud_new') }}" class="btn btn-primary mb-2"><i class="fa fa-user-plus"></i> Nouvel utilisateur</a>
+</div>
+{% endblock %}
 
 {% block body %}
-    <h1>Utilisateurs</h1>
 
-    <a href="{{ path('app_admin_users_crud_new') }}">Nouvel utilisateur</a>
+<div class="card">
+	<div class="card-body">
+		<div class="table-responsive">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Projets</th>
-                <th>Roles</th>
-                <th>Compte Status</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.projets|length }}</td>
-                <td>
-                    {% for role in user.roles %}
+			<span class="badge badge-outline-success">Total: {{ users.getTotalItemCount }}</span>
 
-                        {% if role == "ROLE_USER" %}
-                            Utilisateur
-                        {% elseif role == "ROLE_ADMIN" %}
-                            Administrateur
-                        {% endif %}
+			<table class="table style-1 mb-4" id="ListDatatableView">
+				<thead>
+					<tr>
+						{# sorting of properties based on query components #}
+						<th>{{ knp_pagination_sortable(users, 'Id', 'u.id') }}</th>
+						<th{% if users.isSorted('u.nom') %} class="sorted"{% endif %}>
+							{{ knp_pagination_sortable(users, 'UTILISATEUR', 'u.nom') }}
+						</th>
+						<th>ROLES</th>
+						<th>PROJETS</th>
+						<th{% if users.isSorted(['u.created', 'u.created']) %} class="sorted"{% endif %}>
+							{{ knp_pagination_sortable(users, 'INSCRIT LE', ['u.created', 'u.created']) }}
+						</th>
+						<th{% if users.isSorted('u.siVerified') %} class="sorted"{% endif %}>
+							{{ knp_pagination_sortable(users, 'COMPTE', 'u.isVerified') }}
+						</th>
+						<th>ACTION</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						
+						<tr {% if loop.index is odd %}class="text-danger"{% endif %}>
+							<td>
+								<h6>{{ user.id }}.</h6>
+							</td>
+							<td>
+								<div class="media style-1">
+									<span class="shadow text-uppercase text-light bg-primary d-block font-weight-bold rounded-circle mr-3 text-center" style="width: 50px;height:50px;line-height:50px;border-radius:50%;font-size:2rem;">
+										{{ user.nom|u.truncate(1) }}
+									</span>
+									<div class="media-body">
+										<h6>{{ user.nom }}</h6>
+										<a href="mailto:{{ user.email }}" class="text-dark">{{ user.email }}</a>
+									</div>
+								</div>
+							</td>
+							<td>
+								{% for role in user.roles %}
 
-                    {% endfor %}
-                </td>
-                <td>{{ user.isVerified ? 'Activé' : 'Non activé' }}</td>
-                <td>{{ user.created ? user.created|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.updated ? user.updated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_users_crud_show', {'id': user.id}) }}">Afficher</a>
-                    <a href="{{ path('app_admin_users_crud_edit', {'id': user.id}) }}">Editer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aucun utilisateur</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+									{% if role == 'ROLE_ADMIN' %}
+										<span class="badge badge-outline-success">
+											Administrateur
+										</span>
+									{% elseif role == "ROLE_USER" %}
 
-    {{ knp_pagination_render(users) }}
+									{% else %}
+										<span class="badge badge-outline-light"><i class="fa fa-lock"></i></span>									
+									{% endif %}
+
+								{% endfor %}
+							</td>
+							<td class="text-center">
+								<span class="badge badge-outline-primary font-weight-bold">{{ user.projets|length }}</span>
+							</td>
+							<td>
+								<div>
+									<span class="text-dark">{{ user.created|date('d/m/Y') }}</span>
+									{% if user.user %}
+										<span class="text-dark d-block"><i class="fa fa-user"></i> {{ user.user.nom }}</span>
+									{% endif %}
+								</div>
+							</td>
+							<td>
+								<span class="badge badge-outline-{{ user.isVerified == 1 ? "success" : "danger" }}">{{ user.isVerified == 1 ? "Actif" : "Bloqué" }}</span>
+							</td>
+							<td>
+								<div class="d-flex action-button justify-content-center">
+									{% if is_granted('user_edit', user) %}
+										<a href="{{ path('app_admin_users_crud_edit', {'id': user.id}) }}" class="btn btn-info btn-xs light px-2">
+											<svg width="20" height="20" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+										</a>
+									{% elseif is_granted('user_delete', user) %}
+										<a href="javascript:void(0);" class="ml-2 btn btn-xs px-2 light btn-danger">
+											<svg width="20" height="20" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M3 6H5H21" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+												<path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+											</svg>
+										</a>
+									{% else %}
+										<span class="badge badge-outline-light"><i class="fa fa-lock"></i></span>
+									{% endif %}
+								</div>
+							</td>
+						</tr>
+
+					{% else %}
+						 <tr>
+							<td colspan="7">Aucun utilisateur</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			{{ knp_pagination_render(users) }}
+
+		</div>
+	</div>
+</div>
 
 {% endblock %}

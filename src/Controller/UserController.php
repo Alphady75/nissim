@@ -30,12 +30,6 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
-        $projets = $paginator->paginate(
-            $user->getProjets(),
-            $request->query->getInt('page', 1),
-            5
-        );
-
         $financements = $paginator->paginate(
             $user->getFinancements(),
             $request->query->getInt('page', 1),

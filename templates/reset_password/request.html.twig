@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'auth.html.twig' %}
 
 {% block title %}Reset your password{% endblock %}
 
@@ -6,10 +6,11 @@
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-    <h1>Reset your password</h1>
+
+    <h3 class="text-center mb-4">Reset your password</h3>
 
     {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
+        {{ form_row(requestForm.email, {label: false, attr: {placeholder: 'Adresse Email...'}}) }}
         <div>
             <small>
                 Enter your email address and we will send you a
@@ -17,6 +18,8 @@
             </small>
         </div>
 
-        <button class="btn btn-primary">Send password reset email</button>
+        <div class="text-center pt-3">
+            <button class="btn btn-primary btn-home-border">Send password reset email</button>
+        </div>
     {{ form_end(requestForm) }}
 {% endblock %}

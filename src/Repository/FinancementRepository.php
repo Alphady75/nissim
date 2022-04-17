@@ -57,6 +57,25 @@ class FinancementRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Financement[]
+     */
+    public function findLasted($limit = null)
+    {
+        if(!$limit){
+            $limit = 10;
+        }
+
+        return $this->createQueryBuilder('f')
+            //->andWhere('u.exampleField = :val')
+            //->setParameter('val', $value)
+            ->orderBy('f.created', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Financement
     {

@@ -2,7 +2,10 @@
 	<div class="deznav-scroll">
 		<div class="main-profile">
 			<div class="image-bx">
-				<img src="{{ asset('img/user.jpg') }}" alt="{{ appName }} - logo">
+				<span class="shadow text-uppercase text-light bg-primary d-block font-weight-bold text-center" style="width: 60px;height:60px;line-height:60px;border-radius:10px;font-size:2rem;">
+					{{ app.user.nom|u.truncate(1) }}
+				</span>
+				<!--<img src="{{ asset('img/user.jpg') }}" alt="{{ app.user.nom }} - logo">-->
 				<a href="javascript:void(0);">
 					<i class="fa fa-cog" aria-hidden="true"></i>
 				</a>
@@ -44,7 +47,7 @@
 
 			<li>
 				<a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-					<i class="flaticon-user"></i>
+					<i class="flaticon-077-menu-1"></i>
 					<span class="nav-text">Utilisateurs</span>
 				</a>
 				<ul aria-expanded="false">
@@ -52,15 +55,15 @@
 						<a href="{{ path('app_admin_users_crud_index') }}">Liste</a>
 					</li>
 					<li>
-						<a href="{{ path('app_admin_users_crud_new') }}">Nouvel utilisateurt</a>
+						<a href="{{ path('app_admin_users_crud_new') }}">Nouvel utilisateur</a>
 					</li>
 				</ul>
 			</li>
-			
+
 			<li>
-				<a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-					<i class="flaticon-381-settings-2"></i>
-					<span class="nav-text">Paramètre</span>
+				<a class="ai-icon" href="{{ path('app_admin_financement_crud_index') }}" aria-expanded="false">
+					<i class="flaticon-077-menu-1"></i>
+					<span class="nav-text">Financements</span>
 				</a>
 			</li>
 		</ul>
@@ -68,7 +71,7 @@
 			<p>
 				<strong>{{ appName }} Admin Dashboard</strong>
 				© 2021 All Rights Reserved</p>
-			<p class="fs-12">Made with
+			<p class="fs-12">Made with love
 				<span class="heart"></span>
 				by {{ appConcepteur }}</p>
 		</div>

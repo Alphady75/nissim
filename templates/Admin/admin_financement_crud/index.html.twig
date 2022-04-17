@@ -1,41 +1,33 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Historique des financements{% endblock %}
+{% block title %}Transactions financière{% endblock %}
 
-{% block pagetitle %}{% endblock %}
+{% block colclass %}col-md-12{% endblock %}
+
+{% block pagetitle %}
+    <div class="form-head d-flex flex-wrap mb-sm-4 mb-3 align-items-center">
+        <div class="mr-auto  d-lg-block mb-3">
+            <h2 class="text-black mb-0 font-w700">Transactions financières</h2>
+            <p class="mb-0">
+                Toute les transactions
+            </p>
+        </div>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Historique des financements</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Projet</th>
-                <th>Montant</th>
-                <th>Created</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for financement in financements %}
-            <tr>
-                <td>{{ financement.id }}</td>
-                <td>{{ financement.projet.name }}</td>
-                <td>{{ financement.montant|number_format(2, '.', ' ') }} $</td>
-                <td>{{ financement.created ? financement.created|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_financement_crud_show', {'id': financement.id}) }}">Details</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun financement trouvés</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="card">
+		<div class="card-body p-0">
 
-    {{ knp_pagination_render(financements) }}
+			{% include "admin/admin_financement_crud/_tableau.html.twig" %}
+
+			<div class="p-4">
+				{{ knp_pagination_render(financements) }}
+			</div>
+
+		</div>
+	</div>
+
 
 {% endblock %}

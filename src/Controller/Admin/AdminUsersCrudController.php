@@ -20,9 +20,9 @@ class AdminUsersCrudController extends AbstractController
     public function index(UserRepository $userRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $users = $paginator->paginate(
-            $userRepository->findByDateDesc(),
+            $userRepository->findByNomAsc(),
             $request->query->getInt('page', 1),
-            50
+            20
         );
 
         return $this->render('admin/admin_users_crud/index.html.twig', [
@@ -38,6 +38,11 @@ class AdminUsersCrudController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // User parent
+            if($this->getUser()){
+                $user->setUser($this->getUser());
+            }
 
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -71,6 +76,9 @@ class AdminUsersCrudController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_users_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
+        // Seul l'administrateur auteur peut editer un utilisateur
+        $this->denyAccessUnlessGranted('user_edit', $user);
+        
         $form = $this->createForm(UserEditFormType::class, $user);
         $form->handleRequest($request);
 
@@ -90,6 +98,9 @@ class AdminUsersCrudController extends AbstractController
     #[Route('/{id}', name: 'app_admin_users_crud_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
+        // Seul l'administrateur auteur peut editer un utilisateur
+        $this->denyAccessUnlessGranted('user_edit', $user);
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user);
         }

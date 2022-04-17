@@ -1,36 +1,44 @@
 <div class="basic-form">
 
-    {{ form_start(form) }}
+    <div class="row">
 
-        {{ form_row(form.name) }}
+        <div class="col-md-10 mx-auto">
+                {{ form_start(form) }}
+
+                    {{ form_row(form.name) }}
+                    
+                    <div class="w-50">
+                        {{ form_row(form.imageFile) }}
+                    </div>
+
+                    <div class="w-50">
+                        {{ form_row(form.endDate) }}
+                    </div>
+
+                    <div>
+                        {{ form_row(form.fDescriptive) }}
+                    </div>
+
+                    <div>
+                        {{ form_row(form.aFiabilite) }}
+                    </div>
+
+                    <div>
+                        {{ form_row(form.dInfReglementaire) }}
+                    </div>
+
+                    <div class="w-50">
+                        {{ form_row(form.visible) }}
+                    </div>
+
+                    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
+                    <a href="{{ path('app_admin_projets_crud_index') }}" class="btn btn-danger">
+                        Annuler
+                    </a>
+                {{ form_end(form) }}
+        </div>
         
-        <div class="w-50">
-            {{ form_row(form.imageFile) }}
-        </div>
-
-        <div class="w-50">
-            {{ form_row(form.mCollecte) }}
-
-            {{ form_row(form.endDate) }}
-        </div>
-
-        <div>
-            {{ form_row(form.fDescriptive) }}
-        </div>
-
-        <div>
-            {{ form_row(form.aFiabilite) }}
-        </div>
-
-        <div>
-            {{ form_row(form.dInfReglementaire) }}
-        </div>
-
-        <div class="w-50">
-            {{ form_row(form.visible) }}
-        </div>
-
-        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-    {{ form_end(form) }}
+    </div>
     
 </div>

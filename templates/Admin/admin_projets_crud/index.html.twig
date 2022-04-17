@@ -2,10 +2,9 @@
 
 {% block title %}Projets{% endblock %}
 
-{% block pagetitle %}{% endblock %}
+{% block colclass %}col-md-12{% endblock %}
 
-{% block body %}
-
+{% block pagetitle %}
     <div class="form-head d-flex flex-wrap mb-sm-4 mb-3 align-items-center">
         <div class="mr-auto  d-lg-block mb-3">
             <h2 class="text-black mb-0 font-w700">Projets</h2>
@@ -13,54 +12,87 @@
                 Tout les projets à financer
             </p>
         </div>
-        <a href="{{ path('app_admin_projets_crud_new')}}" class="btn btn-primary btn-rounded mb-3">
+        {{ form_start(form, {attr: {class: 'mr-3'}}) }}
+            {{ form_row(form.q, {attr: {placeholder: 'Rechercher...'}}) }}
+        {{ form_end(form) }}
+        <a href="{{ path('app_admin_projets_crud_new')}}" class="btn btn-primary mb-3">
             <i class="fa fa-plus mr-3"></i>Nouveau projet</a>
     </div>
+{% endblock %}
 
+{% block body %}
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table">
+<div class="card">
+    <div class="card-header">
+        <span class="badge badge-outline-success">Total: {{ projets.getTotalItemCount }}</span>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table shadow-hover card-table border-no tbl-btn short-one">
                 <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Slug</th>
-                        <th>Montant collecté</th>
-                        <th>Créer le</th>
-                        <th>actions</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            {# sorting of properties based on query components #}
+                            <th>{{ knp_pagination_sortable(projets, '#ID', 'u.id') }}</th>
+                            <th{% if projets.isSorted('p.name') %} class="sorted"{% endif %}>
+                                {{ knp_pagination_sortable(projets, 'PROJETS', 'p.name') }}
+                            </th>
+                            <th{% if projets.isSorted(['p.created', 'p.created']) %} class="sorted"{% endif %}>
+                                {{ knp_pagination_sortable(projets, 'CREE LE', ['p.created', 'p.created']) }}
+                            </th>
+                            <th{% if projets.isSorted('u.visible') %} class="sorted"{% endif %}>
+                                {{ knp_pagination_sortable(projets, 'STATUT', 'p.visible') }}
+                            </th>
+                            <th class="text-center">ACTION</th>
+                        </tr>
+                    </thead>
                 </thead>
                 <tbody>
                 {% for projet in projets %}
         
-                    {% if is_granted('projet_edit', projet) %}
-                    
-                        <tr>
-                            <td>{{ projet.id }}</td>
-                            <td>{{ projet.name }}
-                                <br>
-                                <span class="small mt-2"><i class="fa fa-calendar"></i> Date fin: {{ projet.endDate ? projet.endDate|date('d/m/Y H:i:s') : '' }}</span>
-                            </td>
-                            <td>
-                            {% if projet.imageName %}
+                    <tr>
+                        <td>{{ projet.id }}</td>
+                        <td>
+                            <div class="media style-1 w-75">
+                                {% if projet.imageName %}
 
-                                <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" width="100" height="100" alt="{{ projet.name }}"/>
+                                    <img class="mr-3" src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" width="100" height="100" alt="{{ projet.name }}"/>
 
+                                {% endif %}
+                                <div class="media-body">
+                                    <h6>{{ projet.name|u.truncate(250, '...') }}</h6>
+                                    <span><i class="fa fa-calendar"></i> Date de fin: {{ projet.endDate ? projet.endDate|date('d/m/Y') : '' }}</span>
+
+                                    <p class="p-0 m-0"><i class="fa fa-user"></i> Auteur: 
+                                    <strong class="tex-dark font-weight-bold">{{ projet.user.nom }}</strong>
+                                    </p>
+                                    <p class="p-0 m-0"><i class="fa fa-euro-sign"></i>
+                                        Montant collecté: <strong class="text-primary">{{ projet.mCollecte|number_format(2, '.', ' ') }} $</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</td>
+                        <td><span class="badge badge-outline-{{ projet.visible == 1 ? 'success' : 'secondary' }}">{{ projet.visible == 1 ? 'Public' : 'Privé' }}</span></td>
+                        <td class="text-center">
+                            {% if is_granted('projet_edit', projet) %}
+
+                                <div class="dropdown ml-4">
+                                    <a href="#" class="btn btn-light" data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" 
+                                        href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}"><i class="fa fa-fast-forward"></i> Afficher</a>
+                                        <a class="dropdown-item" href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}"><i class="fa fa-pencil"></i> Editer</a>
+                                    </div>
+                                </div>
+
+                            {% else %}
+                                <span class="badge badge-outline-light"><i class="fa fa-lock"></i></span>
                             {% endif %}
-                            </td>
-                            <td>{{ projet.slug }}</td>
-                            <td><strong class="text-primary">{{ projet.mCollecte|number_format(2, '.', ' ') }} $</strong></td>
-                            <td>{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</td>
-                            <td>
-                                <a href="{{ path('app_admin_projets_crud_show', {'id': projet.id}) }}" class="btn btn-secondary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
-                                
-                                <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                            </td>
-                        </tr>
-        
-                    {% endif %}
+                        </td>
+                    </tr>
         
                 {% else %}
                     <tr>
@@ -69,9 +101,12 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            <div class="p-4">
+                {{ knp_pagination_render(projets) }}
+            </div>
         </div>
     </div>
-
-    {{ knp_pagination_render(projets) }}
+</div>
 
 {% endblock %}

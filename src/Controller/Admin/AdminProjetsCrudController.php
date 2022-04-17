@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Projet;
 use App\Form\ProjetType;
 use App\Repository\ProjetRepository;
+use App\Entity\ProjetSearch;
+use App\Form\ProjetSearchType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,17 +27,28 @@ class AdminProjetsCrudController extends AbstractController
     #[Route('/', name: 'app_admin_projets_crud_index', methods: ['GET'])]
     public function index(ProjetRepository $projetRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $user = $this->getUser();
+        //$user = $this->getUser();
+
+        $search = new ProjetSearch();
+        $form = $this->createForm(ProjetSearchType::class, $search);
+        $form->handleRequest($request);
         
-        $projets = $paginator->paginate(
+        /*$projets = $paginator->paginate(
             //$projetRepository->findByDateDesc(),
             $user->getProjets(),
             $request->query->getInt('page', 1),
             100
+        );*/
+
+        $projets = $paginator->paginate(
+            $projetRepository->findSearch($search),
+            $request->query->getInt('page', 1),
+            20
         );
 
-        return $this->render('admin/admin_projets_crud/index.html.twig', [
+        return $this->renderForm('admin/admin_projets_crud/index.html.twig', [
             'projets' => $projets,
+            'form'  =>  $form,
         ]);
     }
 

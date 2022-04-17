@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/financement/crud')]
+#[Route('/admin/financement')]
 class AdminFinancementCrudController extends AbstractController
 {
     #[Route('/', name: 'app_admin_financement_crud_index', methods: ['GET'])]
@@ -20,7 +20,7 @@ class AdminFinancementCrudController extends AbstractController
         $financements = $paginator->paginate(
             $financementRepository->findByDateDesc(),
             $request->query->getInt('page', 1),
-            50
+            20
         );
 
         return $this->render('admin/admin_financement_crud/index.html.twig', [
@@ -51,6 +51,7 @@ class AdminFinancementCrudController extends AbstractController
     {
         return $this->render('admin/admin_financement_crud/show.html.twig', [
             'financement' => $financement,
+            'projet'    =>  $financement->getProjet(),
         ]);
     }
 
