@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financement du projet | {{ projet.name }}{% endblock %}
+
+{% block body %}
+
+<section class="login-section bg-white justify-content-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+                {% if projet.imageName %}
+                <div>
+                    <img src="{{ vich_uploader_asset(projet) | imagine_filter('large_size') }}" class="img-fluid" alt="image"/>
+                </div>
+                {% endif %}
+                <h1 class="pt-3 pb-3">{{ projet.name }}</h1>
+                <hr>
+                <span>Montant Collecté:</span>
+                <h3>{{ projet.mCollecte|number_format(2, '.', ' ') }} $</h3>
+                <p>Date de fin: {{ projet.endDate|date('d/m/Y') }}</p>
+
+			</div>
+            <div class="col-md-4">
+                <div class="p-4 login-wrap ">
+                    <h3>Financer ce projet</h3>
+                    
+                    <!-- Stripe Payment Form -->
+                    <form id="payment-form" method="post" action="{{ path('app_financer', {'id': projet.id}) }}" style="width: 100%" id="stripe-section">
+                        <div class="row">
+                            <div class="col-md-12" style="padding-top: 10px;">
+                                <p style="float: left;">
+                                    Information de votre carte
+                                </p>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- We'll put the error messages in this element -->
+                                        <div class="row w-100 text-left">
+                                            <div id="card-errors" class="col-md-12" role="alert" style="color: red"></div>
+                                        </div>
+
+                                        <!--<div id="card-number"></div>
+
+                                        <div id="card-expiry"></div>
+
+                                        <div id="card-cvc"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-dark btn-rounded">
+                                    <i class="fa fa-circle-notch fa-spin" id="order-loader" style="margin-right: 10px; display: none"></i>
+                                    Payer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Stripe Payment Form -->
+
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    parent()
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        var stripe = Stripe('pk_test_XXXXXXXXXXXXXX');
+        var elements = stripe.elements();
+        
+        //Create a Stripe Form
+        var style = {
+            base: {
+                color: "#32325d",
+            }
+        };
+        var elementClasses = {
+            focus: 'focused',
+            empty: 'empty',
+            invalid: 'invalid',
+        };
+
+        var cardNumber = elements.create("cardNumber", {
+            style: style,
+            classes: elementClasses,
+        });
+
+        cardNumber.mount('#card-number');
+
+        var cardExpiry = elements.create('cardExpiry', {
+            style: style,
+            classes: elementClasses,
+        });
+        cardExpiry.mount('#card-expiry');
+
+        var cardCvc = elements.create('cardCvc', {
+            style: style,
+            classes: elementClasses,
+        });
+        cardCvc.mount('#card-cvc');
+
+        cardNumber.on('change', ({error}) => {
+            let displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        cardExpiry.on('change', ({error}) => {
+            let displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        cardCvc.on('change', ({error}) => {
+            let displayError = document.getElementById('card-errors');
+            if (error) {
+                displayError.textContent = error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+        // End of the Stripe Form
+
+        // Get Form
+        var form = document.getElementById('payment-form');
+
+
+        // When user Submit form
+        form.addEventListener('submit', function(ev) {
+            ev.preventDefault();
+            // If the client secret was rendered server-side as a data-secret attribute
+            // on the <form> element, you can retrieve it here by calling `form.dataset.secret`
+            
+            //Display loader
+            $("#order-loader").show();
+
+            // Create payement
+            makeOrder(cardNumber, form);
+        });
+    </script>
+
+    <script>
+        function makeOrder(cardNumber, form) {
+
+            //Create a new form data
+            var formData = new FormData();
+
+            // Add key value to formData
+            //formData.append("data", value);
+
+            stripe.createToken(cardNumber).then(function(token) {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ path('app_financer', {'id': projet.id}) }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        //Hide loader
+                        $("#order-loader").hide();
+                        console.log(response);
+
+                        var clientSecret = response.client_secret;
+                        // Render the form to collect payment details, then
+                        // call stripe.confirmCardPayment() with the client secret.
+                        
+                        stripe.confirmCardPayment(clientSecret, {
+                            payment_method: {
+                                card: {
+                                    token: token.token.id
+                                },
+                                billing_details: {
+                                    name: document.getElementById("nom").value,
+                                    email: document.getElementById("email").value,
+                                    phone: document.getElementById("telephone").value,
+                                    address: {
+                                        city: document.getElementById("ville").value,
+                                        country: document.getElementById("pays").value,
+                                        line1: document.getElementById("adresse").value,
+                                    }
+                                }
+                            }
+                        }).then(function(result) {
+                            if (result.error) {
+                                // Show error to your customer (e.g., insufficient funds)
+                                console.log(result.error.message);
+                                //Hide loader
+                                $("#order-loader").hide();
+                            } else {
+                                //Hide loader
+                                $("#order-loader").hide();
+                                // The payment has been processed!
+                                if (result.paymentIntent.status === 'succeeded') {
+                                    console.log('payement succeeded');
+                                    form.submit();
+                                    // Show a success message to your customer
+                                    // There's a risk of the customer closing the window before callback
+                                    // execution. Set up a webhook or plugin to listen for the
+                                    // payment_intent.succeeded event that handles any business critical
+                                    // post-payment actions.
+                                }
+                            }
+                        })
+                    },
+                    error: function() {
+                        //Hide loader
+                        $("#order-loader").hide();
+                    }
+                });
+            });
+        }
+    </script>
+
+{% endblock %}

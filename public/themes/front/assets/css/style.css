@@ -2550,3 +2550,19 @@ textarea.form-control{
 	z-index: 3;
 	width: 50%;
 }
+
+/**
+*************** Stripe CSS *******
+**/
+#card-element,
+#card-number,
+#card-expiry,
+#card-cvc {
+	padding: 10px;
+	box-shadow: none;
+	border: 1px solid #e3e8ee;
+	border-radius: 4px;
+	background: white;
+	margin: 20px 0px;
+	transition: box-shadow 0.2s ease;
+}

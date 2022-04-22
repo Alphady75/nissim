@@ -1,41 +1,10 @@
 <?php
 
-namespace App\Entity;
-
-use App\Entity\Traits\CreatedAt;
-//use App\Entity\Traits\StripeFields;
-use App\Repository\FinancementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+namespace App\Entity\Traits;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FinancementRepository::class)]
-#[ORM\HasLifecycleCallbacks]
-class Financement
+class StripeFields
 {
-    use CreatedAt;
-    //use StripeFields;
-
-    const DEVISE = 'eur';
-
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'financements')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
-    #[ORM\Column(type: 'float')]
-    private $montant;
-
-    #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'financements')]
-    private $projet;
-
-    #[ORM\Column(type: 'boolean')]
-    private $statut;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $reference;
 
@@ -53,64 +22,6 @@ class Financement
 
     #[ORM\Column(type: 'string', length: 255)]
     private $statusStripe;
-
-    public function __construct()
-    {
-        $this->project = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getMontant(): ?float
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(float $montant): self
-    {
-        $this->montant = $montant;
-
-        return $this;
-    }
-
-    public function getProjet(): ?Projet
-    {
-        return $this->projet;
-    }
-
-    public function setProjet(?Projet $projet): self
-    {
-        $this->projet = $projet;
-
-        return $this;
-    }
-
-    public function getStatut(): ?bool
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(bool $statut): self
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
 
     public function getReference(): ?string
     {
