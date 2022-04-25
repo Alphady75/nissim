@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Negative;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class FinancementType extends AbstractType
 {
@@ -14,7 +17,15 @@ class FinancementType extends AbstractType
     {
         $builder
             ->add('montant', IntegerType::class, [
-                'attr'  =>  ['placeholder' => 'Saisir un montant']
+                'attr'  =>  ['placeholder' => 'Saisir un montant'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est requis',
+                    ]),
+                    new NotNull([
+                        'message' => 'Veuillez saisir un montant supérieur à 0'
+                    ])
+                ],
             ])
         ;
     }

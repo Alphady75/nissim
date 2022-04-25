@@ -16,7 +16,7 @@
 							<a href="" class="btn btn-home-border first wow fadeInUp" data-wow-delay=".7s">Savoir plus</a>
 						</div>
 						<div class="col-6 text-left">
-							<a href="{{ path('app_financement_projet', {'slug': projet.slug}) }}" class="btn second wow fadeInUp" data-wow-delay=".9s">Contact</a>
+							<a href="{{ path('app_projet_proceder_au_financement', {'slug': projet.slug}) }}" class="btn second wow fadeInUp" data-wow-delay=".9s">Contact</a>
 						</div>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 					<p>Projet terminer</p>
 					<p>Fini le {{ projet.endDate|date('d/m/Y') }}</p>
 
-                    <a href="{{ path('app_financement_projet', {'slug': projet.slug}) }}">Financer maintenant</a>
+                    <a href="{{ path('app_projet_proceder_au_financement', {'slug': projet.slug}) }}" class="btn btn-outline-light">Procéder au financement de ce projet</a>
 				</div>
 
 				<div class="bg-light p-4 widget">

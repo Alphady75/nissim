@@ -6,7 +6,17 @@
                 {{ form_start(form) }}
 
                     {{ form_row(form.name) }}
-                    
+
+                    <div class="w-50">
+                        {{ form_row(form.smCollecte) }}
+                    </div>
+
+                    <div class="w-50">
+                        <small>Ce champ est de préférence gérer automatiquement par le système. <br>
+                        Il permet d'indiquer {{ projet.fStatut }}</small>
+                        {{ form_row(form.fStatut) }}
+                    </div>
+
                     <div class="w-50">
                         {{ form_row(form.imageFile) }}
                     </div>

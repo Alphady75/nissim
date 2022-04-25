@@ -8,6 +8,7 @@ use App\Form\FinancementType;
 use App\Repository\FinancementRepository;
 use App\Manager\ProjetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,64 +16,52 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/financement')]
 class FinancementController extends AbstractController
 {
-    #[Route('/financer/{slug}', name: 'app_financement_projet', methods: ['GET', 'POST'])]
+    #[Route('/projets/{slug}', name: 'app_projet_proceder_au_financement', methods: ['GET', 'POST'])]
     public function financerProjet(
         Request $request, FinancementRepository $financementRepository,
         Projet $projet, ProjetManager $ProjetManager): Response
     {
         $financement = new Financement();
-        $form = $this->createForm(FinancementType::class, $financement);
+        $form = $this->createForm(FinancementType::class, $financement, []);
+
         $form->handleRequest($request);
 
         $user = $this->getUser();
 
-        // API Stripe
-        if($request->getMethod() === "POST"){
-            $ressource = $ProjetManager->stripe($_POST, $projet);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            if(null !== $ressource){
+            $financement->setStatut(0);
+            $financement->setUser($user);
+            $financement->setProjet($projet);
+            $financement->setMontant($financement->getMontant());
+            $financementRepository->add($financement);
 
-                $ProjetManager->inserIntoFinancement($ressource, $projet, $user);
+            $financement = $financementRepository->find($financement);
 
-                return $this->render('financement/success.html.twig', [
+            $form = $this->createForm(FinancementType::class, $financement, [
+                'action'    =>  $this->generateUrl('app_payer', [
+                    'projet' => $projet->getId(),
+                    'financement'  => $financement->getId(),
+                ]),
+                'method' =>  'POST',
+            ]);
 
-                ]);
-            }
+            return $this->redirectToRoute('app_payer', ['financement' => $financement->getId(), 'projet'=> $projet->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('financement/financer.html.twig', [
+        return $this->renderForm('financement/procedToPayment.html.twig', [
             'user'  =>  $user,
             'projet'    => $projet,
-            'intentSecret'  =>  $ProjetManager->intentSecret($projet),
+            //'intentSecret'  =>  $ProjetManager->intentSecret($projet),
             'form' => $form,
         ]);
     }
 
-    #[Route('/payment/projet/{id}', name: 'app_financer', methods: ['POST'])]
-    public function financer(Request $request, ProjetManager $ProjetManager, Projet $projet): Response
-    {
-        $user = $this->getUser();
-
-        // API Stripe
-        if($request->getMethod() === "POST"){
-            $ressource = $ProjetManager->stripe($_POST, $projet);
-
-            if(null !== $ressource){
-
-                $ProjetManager->inserIntoFinancement($ressource, $projet, $user);
-
-                return $this->render('financement/success.html.twig', [
-
-                ]);
-            }
-        }
-    }
-
-    #[Route('/success', name: 'app_financement_success', methods: ['GET'])]
-    public function success(): Response
+    #[Route('/success/{id}', name: 'app_financement_success', methods: ['GET'])]
+    public function success(Financement $financement): Response
     {
         return $this->render('financement/success.html.twig', [
-            
+            'financement' => $financement,
         ]);
     }
 }

@@ -22,8 +22,7 @@ class StripeService {
     }
     
     /**
-     * Recupère le projet à financer et renvoi un formulaire
-     * pour effectuer un paiement
+     * Création de l'intenssion de payement
      * 
      * @param Projet $projet
      * @return \Stripe\PaymentIntent
@@ -42,21 +41,24 @@ class StripeService {
         ]);
     }
 
-    public function payment($montant, $devise, $description, array $stripeParameter)
+    /**
+     * Création du paiement
+     */
+    public function payment($amount, $currency, $description, array $stripeParameter)
     {
         // On set (appel) la clé à utiliser: privée recommandée côté server
         \Stripe\Stripe::setApiKey($this->privateKey);
-        $payment_intent = null;
+        $payment_intent = null; //dd($stripeParameter)
 
         if(isset($stripeParameter['stripeIntentId'])){
             $payment_intent = \Stripe\PaymentIntent::retrieve($stripeParameter['stripeIntentId']);
         }
 
-        if($stripeParameter['stripeIntentId'] === 'succeeced'){
+        /*if($stripeParameter['status'] === 'succeeded'){
             //TODO
         }else{
             $payment_intent->cancel();
-        }
+        }**/
 
         return $payment_intent;
 
@@ -70,7 +72,7 @@ class StripeService {
     public function stripe(array $stripeParameter, Projet $projet)
     {
         return $this->payment(
-            $projet->getMCollecte() * 100,
+            $projet->getMCollecte() * 100, // Montant à revoir
             Financement::DEVISE,
             $projet->getName(),
             $stripeParameter

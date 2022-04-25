@@ -3,8 +3,12 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
     #form_themes: ['bootstrap_4_Horizontal_layout.html.twig']
     globals:
+        app_environement: '%env(APP_ENV)%'
+        stripe_public_key_test: '%env(STRIPE_PUBLIC_KEY_TEST)%'
+        stripe_public_key_live: '%env(STRIPE_PUBLIC_KEY_LIVE)%'
         appName: 'Nissim'
-        appConcepteur: "HL Consulting"
+        currency: '€'
+        appConcepteur: "HL Conception"
 
 when@test:
     twig:

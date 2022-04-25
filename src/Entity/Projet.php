@@ -67,6 +67,12 @@ class Projet
     #[ORM\Column(type: 'boolean')]
     private $visible;
 
+    #[ORM\Column(type: 'float')]
+    private $smCollecte;
+
+    #[ORM\Column(type: 'boolean')]
+    private $fStatut;
+
     public function __construct()
     {
         $this->financements = new ArrayCollection();
@@ -253,6 +259,30 @@ class Projet
     public function setVisible(bool $visible): self
     {
         $this->visible = $visible;
+
+        return $this;
+    }
+
+    public function getSmCollecte(): ?float
+    {
+        return $this->smCollecte;
+    }
+
+    public function setSmCollecte(float $smCollecte): self
+    {
+        $this->smCollecte = $smCollecte;
+
+        return $this;
+    }
+
+    public function getFStatut(): ?bool
+    {
+        return $this->fStatut;
+    }
+
+    public function setFStatut(bool $fStatut): self
+    {
+        $this->fStatut = $fStatut;
 
         return $this;
     }

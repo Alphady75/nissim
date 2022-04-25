@@ -20,8 +20,16 @@ class ProjetType extends AbstractType
     {
         $builder
             ->add('name', TextareaType::class, [
-                'label' => 'Titre',
-                'attr'  =>  ['placeholder' => 'Tritre du projet...'],
+                'label' => 'Description',
+                'attr'  =>  ['placeholder' => 'Décrire votre projet...'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ est requis',
+                    ])
+                ],
+            ])
+            ->add('smCollecte', IntegerType::class, [
+                'label' => 'Seuil minimum de collecte',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Ce champ est requis',
@@ -59,6 +67,9 @@ class ProjetType extends AbstractType
             /*->add('mCollecte', IntegerType::class, [
                 'label' =>  'Montant Collecter'
             ])*/
+            ->add('fStatut', CheckboxType::class, [
+                'label' =>  'Statut de financement'
+            ])
             ->add('visible', CheckboxType::class, [
                 'label' =>  'Visible sur le site'
             ])

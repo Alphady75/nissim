@@ -52,7 +52,7 @@ class ProjetManager {
         $ressource = null;
         $data = $this->stripeService->stripe($stripeParameter, $projet);
 
-        if($data){
+        if($data){ dd('true');
             $ressource = [
                 'stripeBrand'   => $data['charges']['data'][0]['payment_method_details']['card']['brand'],
                 'stripeLast4'   => $data['charges']['data'][0]['payment_method_details']['card']['last4'],
