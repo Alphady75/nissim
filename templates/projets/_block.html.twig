@@ -10,27 +10,18 @@
 			<a href="{{ path('app_projet_detail', {'slug': projet.slug}) }}" class="pricingTable-title d-bloc">
 				<h3 class="title text-left">{{ projet.name }}</h3>
 			</a>
-			<div class="pricingTable-value">
-				<h2 class="price-value">{{ projet.mCollecte|number_format(2, '.', ' ') }}
-					<i class="fa fa-euro-sign"></i></h2>
-				<span class="price-month">Montant colecté</span>
-			</div>
-			<ul class="pricing-content">
-				<li>
-					<i class="ti-check"></i>
-					Fini le
-					{{ projet.endDate|date('d/m/Y') }}
-				</li>
+			<div class="p-0 m-0 text-left">
+				<span class="price-month text-secondary">Montant colecté</span>
+				<h2 class="price-value">{{ projet.mCollecte|number_format(2, '.', ' ') ~ currency }}</h2>
+
+				<span class="text-secondary p-0 d-block text-left pt-3 pb-3 price-month"><i class="fa fa-calendar small "></i> Date de clôture <br> {{ projet.endDate|date('d/m/Y') }}</span>
+
+				<span class="price-month text-secondary">Seuil minimum de collecte</span>
+				<h2 class="price-value">{{ projet.smCollecte|number_format(2, '.', ' ') ~ currency }}</h2>
 				{% if(projet.fStatut == 1) %}
-				<li>
-					<span class="badge">Collecte réussie!</span>
-				</li>
+					<span class="badge text-primary font-weight-bold p-0">Collecte réussie!</span> <br>
 				{% endif %}
-			</ul>
-			<div class="pricingTable-value">
-				<h2 class="price-value">{{ projet.smCollecte|number_format(2, '.', ' ') }}
-					<i class="fa fa-euro-sign"></i></h2>
-				<span class="price-month">Seuil minimum de collecte</span>
+				
 			</div>	
 		</div>
 	</div>

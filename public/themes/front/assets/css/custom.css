@@ -1,0 +1,101 @@
+.costom-section-padding{
+	padding: 10% 0 3% 0;
+}
+.costom-padding-style2{
+	padding: 3% 0;
+}
+.costom-padding-style3{
+	padding: 100px 0;
+}
+.costom-margin-top{
+	margin-top: 100px;
+}
+.section-proced-to-payment table,
+.section-proced-to-payment .badge{
+	font-size: 15px;
+}
+.section-proced-to-payment table th{
+	font-weight: 100;
+	padding: 0px;
+}
+.section-proced-to-payment table td{
+	text-align: right;
+	padding: 0px;
+}
+.section-proced-to-payment .input-group .input-group-append{
+	background-color: transparent!important;
+	border: 0!important;
+}
+.section-proced-to-payment span{
+	font-size: 16px;
+	font-weight: 500;
+}
+.paiement-proccess-banner{
+	padding: 5% 0;
+}
+.paiement-proccess-banner h1{
+	font-size: 20px;
+	padding-top: 20px 0;
+}
+.user-financement th,
+.user-financement td{
+	font-size: 16px!important;
+	font-weight: 200!important;
+	padding: 0 10px!important;
+	text-align: left!important;
+}
+.user-financement .badge.montant{
+	font-weight: 900!important;
+}
+.section-banner{
+	height: 60vh;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+.section-banner .media .picture{
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	line-height: 100px;
+	color: white;
+	font-size: 3rem;
+	font-weight: 900;
+	text-align: center;
+	margin-top: -60px;
+	margin-right: 15px;
+}
+.section-banner .media h3{
+	font-weight: 900;
+	padding: 0;
+	margin: 0;
+}
+.section-banner .caption {
+	position: relative;
+	padding: 10% 0 0 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+.section-banner .caption .caption-bottom{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid lightgrey;
+}
+.section-banner .caption h1 {
+	color: #fff;
+	font-size: 30px;
+	padding: 30px 0 0 0;
+}
+.section-margin-top{
+	margin-top: 90px
+}

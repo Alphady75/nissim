@@ -22,7 +22,7 @@
                     </td>
                     <td><span class="text-black">{{ financement.id }}</span></td>
                     <td>
-                        <span class="text-black">{{ financement.created|date('d/m/Y') }}</span>
+                        <span class="badge">{{ financement.created|date('d/m/Y à H:i:s') }}</span>
                     </td>
                     <td>
                         <span class="shadow text-light bg-primary rounded-circle d-block font-weight-bold text-center" style="width: 35px;height:35px;line-height:35px;border-radius:50%;font-size:1rem;">
@@ -35,7 +35,7 @@
                     <td><i class="fa fa-credit-card"></i></td>
                     <td><span class="font-w100">{{ financement.projet.name|u.truncate(35, '...') }}</span></td>
                     <td>
-                        <span class="font-w600 text-black">{{ financement.montant|number_format(2, '.', ' ') }}$</span>
+                        <span class="font-w600 text-black badge font-weight-bold">{{ financement.montant|number_format(2, '.', ' ') ~ currency }}</span>
                     </td>
                     <td>
                         <span class="badge text-uppercase badge-sm badge-outline-{{ financement.statut == 1 ? 'success' : 'danger' }}">

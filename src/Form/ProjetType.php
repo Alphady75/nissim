@@ -56,7 +56,7 @@ class ProjetType extends AbstractType
                 'label' => 'Documents d\'informations réglementaire'
             ])
             ->add('endDate', DateType::class, [
-                'label'     =>  'Date de fin',
+                'label'     =>  'Date de clôture',
                 'widget' => 'single_text',
                 'constraints' => [
                     new NotBlank([
@@ -68,7 +68,7 @@ class ProjetType extends AbstractType
                 'label' =>  'Montant Collecter'
             ])*/
             ->add('fStatut', CheckboxType::class, [
-                'label' =>  'Statut de financement'
+                'label' =>  'Collecte réussie!'
             ])
             ->add('visible', CheckboxType::class, [
                 'label' =>  'Visible sur le site'

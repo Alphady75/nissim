@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\EditeProfilFormType;
 use App\Repository\ProjetRepository;
+use App\Repository\FinancementRepository;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,20 +27,19 @@ class UserController extends AbstractController
     }
 
     #[Route('/espace-utilisateur', name: 'app_userspace', methods: ['GET'])]
-    public function profile(ProjetRepository $projetRepository, PaginatorInterface $paginator, Request $request): Response
+    public function profile(FinancementRepository $financementRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $user = $this->getUser();
 
         $financements = $paginator->paginate(
-            $user->getFinancements(),
+            $financementRepository->findByDateDesc(),
             $request->query->getInt('page', 1),
-            5
+            8
         );
 
         return $this->render('user/userspace.html.twig', [
-            'user' => $user,
-            'projets' => $projets,
-            'financements'   =>   $financements
+            'user'  =>  $user,
+            'financements' => $financements,
         ]);
     }
 

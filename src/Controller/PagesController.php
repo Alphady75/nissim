@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PagesController extends AbstractController
@@ -33,10 +37,34 @@ class PagesController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_pages_contact')]
-    public function contact(): Response
+    public function contact(Request $request, MailerInterface $mailerInterface): Response
     {
-        return $this->render('pages/contact.html.twig', [
-            'controller_name' => 'PagesController',
+        $form = $this->createForm(ContactType::class);
+        $contact = $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            // Envoie de mail
+            $email = (new TemplatedEmail())
+                ->from($contact->get('email')->getData())
+                ->to('vous@domain.com')
+                ->subject('Contact depuis le site (Nom du mon site)')
+                ->htmlTemplate('emails/_contact.html.twig')
+                ->context([
+                    'useremail'  =>  $contact->get('email')->getData(),
+                    'sujet' =>  $contact->get('sujet')->getData(),
+                    'content'   =>  $contact->get('content')->getData()
+                ])
+            ;
+
+            $mailerInterface->send($email);
+
+            $this->addFlash('success', 'Mail de contact envoyer');
+            return $this->redirectToRoute('app_pages_contact');
+        }
+
+        return $this->renderForm('pages/contact.html.twig', [
+            'form' => $form,
         ]);
     }
 }

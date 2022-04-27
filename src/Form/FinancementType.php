@@ -17,7 +17,8 @@ class FinancementType extends AbstractType
     {
         $builder
             ->add('montant', IntegerType::class, [
-                'attr'  =>  ['placeholder' => 'Saisir un montant'],
+                'label' => 'Montant à financer',
+                'attr'  =>  ['placeholder' => 'Saisir un montant...', 'class' => 'border border-success rounded'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Ce champ est requis',

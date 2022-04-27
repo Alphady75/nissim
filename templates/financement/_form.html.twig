@@ -1,4 +1,12 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn-home-border btn-sm">{{ button_label|default('Proceder au paiement') }}</button>
-{{ form_end(form) }}
+
+<div class="p-4 bg-white shadow h-100">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <button class="btn-home-border btn-block">
+                <i class="fa fa-credit-card float-left"></i>
+                <span class="float-right">{{ button_label|default('Suivant') }}</span>
+            </button>
+        </div>
+    {{ form_end(form) }}
+</div>

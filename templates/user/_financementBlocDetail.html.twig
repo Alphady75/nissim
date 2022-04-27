@@ -1,0 +1,55 @@
+<!-- The Modal -->
+<div class="modal fade" id="financemenDetail-{{ financement.id }}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0">
+        <h4 class="modal-title">Details du financement</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body table-responsive">
+        <table class="table text-left">
+        	<tbody>
+        		<tr>
+	          		<th>Date</th>
+	        		<td><span class="badge"><i class="fa fa-calendar"></i> {{ financement.created|date('d/m/Y') }}</span></td>      			
+        		</tr>
+        		<tr>
+        			<th>Montant</th>
+        			<td><span class="badge montant">{{ financement.montant|number_format(2, ' ', ' ') ~ currency }}</span></td>
+        		</tr>
+        		<tr>
+        			<th>Projet</th>
+        			<td>
+        				<div class="media">
+        					{% if financement.projet.imageName %}
+							<img src="{{ vich_uploader_asset(financement.projet) | imagine_filter('large_size') }}" class="mr-2" width="90" height="90" alt="{{ financement.projet.name }}"/>
+							{% endif %}
+        					<div class="media-body">
+        						<h4>{{ financement.projet.name }}</h4>
+        						<strong>{{ financement.projet.fStatut == 1 ? "Projet terminer" : "En cours de financement" }}</strong>
+        					</div>
+        				</div>
+        			</td>
+        		</tr>
+        		<tr>
+        			<th>Statut de la transaction</th>
+        			<td>
+        				<span class="badge badge-{{ financement.statut == 1 ? 'success' : 'danger'}}">{{ financement.statut == 1 ? 'réussi' : 'échoué'}}</span>
+        			</td>
+        		</tr>
+        	</tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+      </div>
+
+    </div>
+  </div>
+</div>

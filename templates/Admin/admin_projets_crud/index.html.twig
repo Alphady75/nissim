@@ -61,18 +61,21 @@
                                 {% endif %}
                                 <div class="media-body">
                                     <h6>{{ projet.name|u.truncate(250, '...') }}</h6>
-                                    <span><i class="fa fa-calendar"></i> Date de fin: {{ projet.endDate ? projet.endDate|date('d/m/Y') : '' }}</span>
+                                    <span><i class="fa fa-calendar"></i> Date de clôture: {{ projet.endDate ? projet.endDate|date('d/m/Y') : '' }}</span>
 
                                     <p class="p-0 m-0"><i class="fa fa-user"></i> Auteur: 
                                     <strong class="tex-dark font-weight-bold">{{ projet.user.nom }}</strong>
                                     </p>
                                     <p class="p-0 m-0"><i class="fa fa-euro-sign"></i>
-                                        Montant collecté: <strong class="text-primary">{{ projet.mCollecte|number_format(2, '.', ' ') }} $</strong>
+                                        Montant collecté: <strong class="text-primary badge">{{ projet.mCollecte|number_format(2, '.', ' ')  ~ currency }}</strong>
+                                    </p>
+                                    <p class="p-0 m-0"><i class="fa fa-euro-sign"></i>
+                                        Seuil minimum de collecté: <strong class="text-primary badge">{{ projet.smCollecte|number_format(2, '.', ' ')  ~ currency }}</strong>
                                     </p>
                                 </div>
                             </div>
                         </td>
-                        <td>{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</td>
+                        <td><span class="badge">{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</span></td>
                         <td><span class="badge badge-outline-{{ projet.visible == 1 ? 'success' : 'secondary' }}">{{ projet.visible == 1 ? 'Public' : 'Privé' }}</span></td>
                         <td class="text-center">
                             {% if is_granted('projet_edit', projet) %}

@@ -46,7 +46,11 @@
             </tr>
             <tr>
                 <th>Montant collecté</th>
-                <td><strong class="text-primary">{{ projet.mCollecte|number_format(0, '.', ' ') }}</strong></td>
+                <td><strong class="text-primary">{{ projet.mCollecte|number_format(0, '.', ' ') ~ currency }}</strong></td>
+            </tr>
+            <tr>
+                <th>Seuil minimu de collecte</th>
+                <td><strong class="text-primary">{{ projet.smCollecte|number_format(0, '.', ' ') ~ currency }}</strong></td>
             </tr>
             <tr>
                 <th>Visiblité</th>

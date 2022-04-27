@@ -1,13 +1,22 @@
-<section class="section-banner" style="background-image: url();">
+<section class="section-banner costom-margin-top" style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg')}});">
 	<div class="caption">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<h1>Espace utilisateur</h1>
-				</div>
-				<div class="col-md-6">
-					<p>Bienvenue
-						{{ app.user.nom }}</p>
+			<h1 class="wow fadeInUp pb-4" data-wow-delay=".5s">Espace utilisateur</h1>
+		</div>
+		<div class="caption-bottom bg-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="media bg-white p-3 rounded">
+							<span class="picture bg-primary">
+								{{ app.user.nom|u.truncate(1) }}
+							</span>
+							<div class="media-body">
+								<h3>{{ app.user.nom }}</h3>
+								<span class="badge p-0">{{ app.user.email }}</span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

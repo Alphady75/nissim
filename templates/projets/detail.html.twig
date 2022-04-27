@@ -66,26 +66,45 @@
 				<div class="bg-light p-4 widget">
 					<h2 class="text-center">Financer ce projet</h2>
 
-					<p>Projet terminer</p>
-					<p>Fini le {{ projet.endDate|date('d/m/Y') }}</p>
+					{% if projet.fStatut == 1 %}
+						<p>Projet terminer</p>
+					{% endif %}
+					
+					<p>Date de fin {{ projet.endDate|date('d/m/Y') }}</p>
 
-                    <a href="{{ path('app_projet_proceder_au_financement', {'slug': projet.slug}) }}" class="btn btn-outline-light">Procéder au financement de ce projet</a>
+                    <a href="{{ path('app_projet_proceder_au_financement', {'slug': projet.slug}) }}" class="mt-3 btn btn-success">Procéder au financement</a>
 				</div>
 
 				<div class="bg-light p-4 widget">
 					<h2 class="text-center">Montant collecté</h2>
 
-					<h3>{{ projet.mCollecte|number_format(2, '.', ' ') }} $</h3>
-					<p>Type d'investissement:</p>
-					<p>Girardin Agricol</p>
+					<h3 class="font-weight-bold text-center">{{ projet.mCollecte|number_format(2, '.', ' ') ~ currency }}</h3>
+					<!--<p>Type d'investissement:</p>
+					<p>Girardin Agricol</p>-->
 				</div>
 
 				<div class="bg-light p-4 widget">
 					<h2 class="text-center">Etat de la collecte</h2>
-
-					<p>Temps restant: Projet financé</p>
-					<p>Date de clôture: 18/03/2022</p>
-					<p>Seuil de succès minimum de collecte: 79448 $</p>
+					<table class="table table-borderless">
+						<tbody>
+							<tr>
+								<td>Temps restant</td>
+								<td>
+									{% if projet.fStatut == 1 %}
+										<span class="badge badge-success">Projet terminer</span>
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td>Date de clôture</td>
+								<td>{{ projet.endDate|date('d/m/Y') }}</td>
+							</tr>
+							<tr>
+								<td>Seuil de succès minimum de collecte:</td>
+								<td>{{ projet.smCollecte|number_format(2, '.', ' ') ~ currency }}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
 				<div class="bg-primary text-light widget green-widget">
@@ -99,7 +118,9 @@
 
                         {% if is_granted('projet_edit', projet) %}
 
-                            <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}">Editer le projet</a>
+                            <a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn btn-lg btn-outline-light">Editer le projet</a>
+
+							<a href="{{ path('app_admin_projets_crud_edit', {'id': projet.id}) }}" class="btn-home-border">Soumettre un projet</a>
 
                         {% endif %}
 

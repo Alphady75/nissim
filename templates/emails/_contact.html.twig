@@ -1,0 +1,9 @@
+<div style="border: 1px solid gray; padding: 15px;">
+    <h1>Nouveau Message</h1>
+    
+    <p>Destinataire: <a href="mailto: {{ useremail }}">{{ useremail }}</a></p>
+    
+    <p>Sujet: {{ sujet }}</p>
+    
+    <p>Message: {{ content|raw }}</p>
+</div>

@@ -4,6 +4,76 @@
 
 {% block body %}
 
+<!-- PAIMENT PROCCESS BANNER -->
+<section class="paiement-proccess-banner bg-light costom-margin-top">
+    <div class="container">
+        <h1>Financement du projet: <span class="text-primary">{{ projet.name }}</span></h1>
+    </div>
+</section>
+<!-- END PAIMENT PROCCESS BANNER -->
+
+<!-- PROCED TO PAYMENT SECTION -->
+<section class="section-proced-to-payment costom-padding-style2">
+    <div class="container">
+        <div class="pt-4 pb-4">
+            <h4>Procéder au financement</h4>
+                    <div class="row pt-4">
+                        <div class="col-md-6">
+                            <form class="p-4 bg-white shadow rounded mb-4">
+                                <h4 class="card-title">Montant à financer</h4>
+                                <div class="input-group mb-3 border rounded">
+                                    <input type="number" class="form-control" placeholder="Saisir un montant...">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text bg-white border-0">{{ currency }}</span>
+                                    </div>
+                                 </div>
+                                <div class="form-group">
+                                    <button class="btn-home-border btn-block"><i class="fa fa-credit-card float-left"></i> <span class="float-right">Suivant</span></button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded">
+                                <h4 class="card-title">Détails du Projet à financer</h4>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-5">
+                                        <img src="assets/img/cabane-one-performance.jpg" class="img-fluid mb-3">
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <th><i class="fa fa-credit-card"></i> Montant financé:</th>
+                                                        <td><strong class="font-weight-bold">39 000$</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Seuil minimum de collecte</th>
+                                                        <td><strong class="font-weight-bold">39 000$</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><i class="fa fa-calendar"></i> Date de fin</th>
+                                                        <td><span>15/08/2023</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="font-16 font-16"><i class="fa fa-info"></i> Statut</th>
+                                                        <td><span class="badge badge-primary small">collecte réussie</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END PROCED TO PAYMENT SECTION-->
+
 <section class="login-section bg-white justify-content-center">
 	<div class="container">
 		<div class="row">
