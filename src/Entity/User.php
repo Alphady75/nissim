@@ -50,11 +50,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: self::class)]
     private $users;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class)]
+    private $posts;
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();
         $this->financements = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +256,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($user->getUser() === $this) {
                 $user->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
             }
         }
 
