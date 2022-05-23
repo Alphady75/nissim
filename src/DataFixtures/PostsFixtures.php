@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use Faker;
 
 
-class PostsFixtures extends  implements DependentFixtureInterface
+class PostsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -17,8 +17,6 @@ class PostsFixtures extends  implements DependentFixtureInterface
 
         for($posts = 1; $posts <= 100; $posts++){
             $user = $this->getReference('user_'. $faker->numberBetween(1, 200));
-            $financements = $this->getReference('financement_'. $faker->numberBetween(1, 100));
-
             $post = new Post();
 
             $post->setName($faker->realText(150));

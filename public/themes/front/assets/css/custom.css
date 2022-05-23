@@ -48,7 +48,7 @@
 	font-weight: 900!important;
 }
 .section-banner{
-	height: 60vh;
+	height: 70vh;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -75,7 +75,7 @@
 }
 .section-banner .caption {
 	position: relative;
-	padding: 10% 0 0 0;
+	padding: 15% 0 0 0;
 	background-color: rgba(0, 0, 0, 0.7);
 	position: absolute;
 	width: 100%;

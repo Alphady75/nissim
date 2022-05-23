@@ -1,0 +1,24 @@
+<div class="single_blog mb-3">
+	{% if post.imageName %}
+	<div class="blog_img">
+		<a href="{{ path('app_blog_detail', {slug: post.slug }) }}"><img src="{{ vich_uploader_asset(post) | imagine_filter('midle_size') }}" class="img-fluid w-100" alt="{{ post.name }}" /></a>
+	</div>
+	{% endif %}
+	<div class="blog_content">
+		<h3 class="h6"><a href="{{ path('app_blog_detail', {slug: post.slug }) }}">{{ post.name }}</a></h3>								
+		<div class="blog-meta">
+			<div class="row">
+				<div class="col-sm-6">
+					<span class="blog-date"><i class="fa fa-calendar-alt mr-2"></i>{{ post.created|date('d/m/Y') }}</span>	<br>
+					<span class="blog-author">
+						<i class="fa fa-user-circle"></i>
+						<strong class="small">{{ post.user.nom }}</strong>
+					</span>
+				</div>
+				<div class="col-sm-6 text-right">
+					<a href="{{ path('app_blog_detail', {slug: post.slug }) }}" class="blog_btn"><i class="ti-arrow-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

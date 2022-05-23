@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ post.name }} - Blog{% endblock %}
+
+{% block body %}
+
+<section class="section-banner" style="background-image: url({{ post.imageName ? vich_uploader_asset(post) | imagine_filter('very_large_size') : '' }});">
+
+	<div class="caption">
+		<div class="container">
+			<h1>{{ post.name }}</h1>
+		</div>
+	</div>
+</section>
+
+<section class="costom-padding-style2">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="nav p-0 mb-3 font-weight-bold">
+					<a href="{{ path('app_home') }}" class="mr-2 text-dark"><i class="fa fa-home"></i> / </a>
+					<a href="{{ path('app_blog') }}" class="mr-2 text-dark">Blog / </a>
+					<a href="#">{{ post.name|u.truncate(60, '...') }}</a>
+				</div>
+
+				<div class="">
+					<p><i class="fa fa-calendar-alt"></i> Publié le {{ post.created|date('d/m/Y') }}</p>
+
+					<div>
+						{{ post.content|raw }}
+					</div>
+
+				</div>
+			</div>
+			<div class="col-md-5">
+				{{ include('blog/_sidebar.html.twig') }}
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

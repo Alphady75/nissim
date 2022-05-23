@@ -5,19 +5,34 @@ namespace App\Controller\Admin;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/posts')]
 class AdminPostsController extends AbstractController
 {
-    #[Route('/', name: 'app_admin_posts_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    private $sluger;
+
+    public function __construct(SluggerInterface $sluger)
     {
+        $this->sluger = $sluger;
+    }
+
+    #[Route('/', name: 'app_admin_posts_index', methods: ['GET'])]
+    public function index(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $posts = $paginator->paginate(
+            $postRepository->findByDateDesc(),
+            $request->query->getInt('page', 1),
+            20
+        );
+
         return $this->render('admin/admin_posts/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
         ]);
     }
 
@@ -29,6 +44,12 @@ class AdminPostsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $projet->setSlug($this->sluger->slug($projet->getName()));
+            $projet->setUser($this->getUser());
+
+            $this->addFlash('success', 'Le contenu a bien été enregistrer avec succès');
+
             $postRepository->add($post);
             return $this->redirectToRoute('app_admin_posts_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -55,6 +76,8 @@ class AdminPostsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $postRepository->add($post);
+
+            $this->addFlash('success', 'Le contenu a bien été modifié avec succès');
             return $this->redirectToRoute('app_admin_posts_index', [], Response::HTTP_SEE_OTHER);
         }
 

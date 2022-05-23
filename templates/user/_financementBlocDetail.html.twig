@@ -1,6 +1,6 @@
 <!-- The Modal -->
 <div class="modal fade" id="financemenDetail-{{ financement.id }}">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -14,40 +14,34 @@
         <table class="table text-left">
         	<tbody>
         		<tr>
-	          		<th>Date</th>
-	        		<td><span class="badge"><i class="fa fa-calendar"></i> {{ financement.created|date('d/m/Y') }}</span></td>      			
+	          		<th> <p class="pt-2 pb-2">Date</p></th>
+	        		<td><p class="mt-3 mb-3"><i class="fa fa-calendar"></i> {{ financement.created|date('d/m/Y') }}</p></td>      			
         		</tr>
         		<tr>
-        			<th>Montant</th>
-        			<td><span class="badge montant">{{ financement.montant|number_format(2, ' ', ' ') ~ currency }}</span></td>
+        			<th> <p class="pt-2 pb-2">Montant</p></th>
+        			<td><p class="badge montant mt-3 mb-3">{{ financement.montant|number_format(2, ' ', ' ') ~ currency }}</p></td>
         		</tr>
         		<tr>
-        			<th>Projet</th>
+        			<th> <p class="pt-2 pb-2">Projet</p></th>
         			<td>
-        				<div class="media">
+        				<div class="media mt-3 mb-3">
         					{% if financement.projet.imageName %}
-							<img src="{{ vich_uploader_asset(financement.projet) | imagine_filter('large_size') }}" class="mr-2" width="90" height="90" alt="{{ financement.projet.name }}"/>
-							{% endif %}
+    							<img src="{{ vich_uploader_asset(financement.projet) | imagine_filter('large_size') }}" class="mr-2" width="90" height="90" alt="{{ financement.projet.name }}"/>
+    							{% endif %}
         					<div class="media-body">
-        						<h4>{{ financement.projet.name }}</h4>
-        						<strong>{{ financement.projet.fStatut == 1 ? "Projet terminer" : "En cours de financement" }}</strong>
+        						<h4 class="h6 font-weight-bold pt-3">{{ financement.projet.name }}</h4>
         					</div>
         				</div>
         			</td>
         		</tr>
         		<tr>
-        			<th>Statut de la transaction</th>
+        			<th> <p class="pt-2 pb-2">Statut de la transaction</p></th>
         			<td>
-        				<span class="badge badge-{{ financement.statut == 1 ? 'success' : 'danger'}}">{{ financement.statut == 1 ? 'réussi' : 'échoué'}}</span>
+        				<span class="mt-3 mb-3 badge badge-{{ financement.statut == 1 ? 'success' : 'danger'}}">{{ financement.statut == 1 ? 'réussi' : 'échoué'}}</span>
         			</td>
         		</tr>
         	</tbody>
         </table>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
       </div>
 
     </div>

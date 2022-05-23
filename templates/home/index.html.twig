@@ -20,8 +20,8 @@
 
 						<!-- Mobile Home Welcome image -->
 						<div class="imgbox wow fadeInRight pb-4 pt-md-4 pt-lg-0 d-block d-md-none" data-wow-delay=".3s" style="background-image: url({{ asset('themes/front/assets/img/welcome-img.png')}})"><!--<img src="">-->
-						
-                        </div>
+
+						</div>
 						<!-- Mobile Home Welcome image -->
 
 						<p>
@@ -47,13 +47,13 @@
 				<!-- Display none on mobile -->
 				<div class="col-md-6 d-none d-sm-block">
 					<div
-						class="imgbox wow fadeInRight pb-4 pt-md-4 pt-lg-0" data-wow-delay=".3s" style="background-image: url('{{ asset('themes/front/assets/img/welcome-img.png')}}');"><!--<img src="">-->
-					</div>
+					class="imgbox wow fadeInRight pb-4 pt-md-4 pt-lg-0" data-wow-delay=".3s" style="background-image: url('{{ asset('themes/front/assets/img/welcome-img.png')}}');"><!--<img src="">-->
 				</div>
-
 			</div>
+
 		</div>
 	</div>
+</div>
 </section>
 <!-- END  HOME DESIGN -->
 
@@ -66,7 +66,7 @@
 				<div class="wow fadeInUp">
 					<p>En fonction de vos objectifs personnels, vous pouvez investir et soutenir des projets à forte valeur ajoutée.
 						<br>
-						Vous souhaitez en savoir plus?</p>
+					Vous souhaitez en savoir plus?</p>
 
 					<a href="{{ path('app_projets') }}" class="btn-home-border btn btn-lg">Voir les projets</a>
 				</div>
@@ -213,7 +213,7 @@
 					<div class="text-center text-md-left">
 						<a href="tel:09 00 00 00 00" class="btn-home-border btn">
 							<i class="fa fa-phone"></i>
-							09 00 00 00 00</a>
+						09 00 00 00 00</a>
 					</div>
 				</div>
 
@@ -222,6 +222,26 @@
 	</div>
 </section>
 <!-- END CALL ACTION SECTION -->
+
+<!-- START BLOG -->		
+<section id="blog" class="fresh-news section-padding">
+	<div class="container">
+		<div class="section-title text-center pb-5">
+			<h2>Dernières news</h2>
+			<div class="underline"></div>
+		</div>			
+		<div class="row">
+			{% for post in posts %}					
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+				{{ include('blog/_postbox.html.twig') }}
+			</div>
+			{% else %}
+			<p class="lead">Aucune news pour l'instant...</p>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<!-- END BLOG -->
 
 <!-- START PERFORMANCES SECTION -->
 <section class="performance-area" style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg')}})">
@@ -233,7 +253,7 @@
 						<span>performances</span>
 						passées ne préjugent pas des
 						<span>performances</span>
-						futures</h2>
+					futures</h2>
 				</div>
 			</div>
 		</div>

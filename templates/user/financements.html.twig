@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos financements{% endblock %}
+
+{% block body %}
+
+{% include "user/_sectionBanner.html.twig" %}
+
+<!-- START PROJECT AREA CONTENT -->
+<section class="bg-light costom-padding-style2">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+                    <div class="card-header bg-white">
+                        <h4 class="card-title font-weight-bold">Historique des financements</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-borderless user-financement">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid green;">
+                                        <th> <i class="fa fa-calendar text-secondary"></i> Date</th>
+                                        <th>Montant</th>
+                                        <th>Projet</th>
+                                        <th>Statut</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for financement in userfinancements(app.user, 6) %}
+
+                                    <!-- if is_granted('app_auteur_du_financement', financement) %}-->
+                                    <tr class="col-md-4">
+
+                                        <td>{{ financement.created|date('d/m/Y') }}</td>
+                                        <td>
+                                            <span class="badge montant">{{ financement.montant|number_format(2, ' ', ' ') ~ currency }}</span></td>
+                                            <td>{{ financement.projet.name|u.truncate(30, '...') }}  {{ financement.user.nom }}</td>
+                                            <td><span class="badge badge-{{ financement.statut == 1 ? 'success' : 'danger'}}">{{ financement.statut == 1 ? 'réussi' : 'échoué'}}</span></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn" data-toggle="modal" data-target="#financemenDetail-{{ financement.id }}">
+                                                  <i class="fa fa-ellipsis-h"></i>
+                                              </button>
+
+                                              {% include "user/_financementBlocDetail.html.twig" %}
+                                          </td>
+                                      </tr>
+                                      <!-- endif %} -->
+                                      {% else %}
+                                      <tr>
+                                        <td colspan="5">Vous n'avez financez aucun projrt</td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                        {{ knp_pagination_render(financements) }}
+                    </div>         
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END PROJECT AREA CONTENT -->
+
+{% endblock %}

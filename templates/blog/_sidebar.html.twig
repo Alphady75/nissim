@@ -1,0 +1,27 @@
+<div class="p-sm-4 bg-">
+	<div class="rounded">
+		<h4 class="pt-4 pb-4 font-weight-bold">Derniers news</h4>
+		{% for post in lastposts() %}
+		<span class="small"><i class="fa fa-calendar-alt"></i> {{ post.created|date('d/m/Y') }}</span>
+		<a href="{{ path('app_blog_detail', {slug: post.slug }) }}"><h2 class="h6 font-weight-bold">{{ post.name }}</h2></a>
+		{% endfor %}
+	</div>
+
+	<hr>
+
+	<div class="rounded">
+		<h4 class="pt-4 pb-4 font-weight-bold">Financer un projet</h4>
+		{% for projet in lastprojets() %}
+		<div class="media mb-3">
+			{% if projet.imageName %}
+			<a href="{{ path('app_projet_detail', {slug: projet.slug }) }}"><img src="{{ vich_uploader_asset(projet) | imagine_filter('medium_avatar') }}" class="mr-2" alt="{{ projet.name }}" /></a>
+			{% endif %}
+			<div class="media-body">
+				<a href="{{ path('app_projet_detail', {slug: projet.slug }) }}"><h2 class="h6">{{ projet.name }}</h2></a>
+			</div>
+		</div>
+		{% endfor %}
+
+		<a href="{{ path('app_projets') }}" class="btn-home-border">Plus de projets <i class="ti-arrow-right"></i></a>
+	</div>
+</div>

@@ -38,7 +38,7 @@
                                 {{ knp_pagination_sortable(projets, 'PROJETS', 'p.name') }}
                             </th>
                             <th{% if projets.isSorted(['p.created', 'p.created']) %} class="sorted"{% endif %}>
-                                {{ knp_pagination_sortable(projets, 'CREE LE', ['p.created', 'p.created']) }}
+                                {{ knp_pagination_sortable(projets, 'DATE CREATION', ['p.created', 'p.created']) }}
                             </th>
                             <th{% if projets.isSorted('u.visible') %} class="sorted"{% endif %}>
                                 {{ knp_pagination_sortable(projets, 'STATUT', 'p.visible') }}
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><span class="badge">{{ projet.created ? projet.created|date('d/m/Y H:i:s') : '' }}</span></td>
+                        <td><span class="badge">{{ projet.created ? projet.created|date('d/m/Y') : '' }}</span></td>
                         <td><span class="badge badge-outline-{{ projet.visible == 1 ? 'success' : 'secondary' }}">{{ projet.visible == 1 ? 'Public' : 'Privé' }}</span></td>
                         <td class="text-center">
                             {% if is_granted('projet_edit', projet) %}

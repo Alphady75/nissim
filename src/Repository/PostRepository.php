@@ -45,6 +45,26 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Permet de recupérer les posts par date, ordre décroissante
+    * @return Posts[] Returns an array of Projet objects
+    */
+    public function findByDateDesc($online = null, $limit = null)
+    {
+        if(!$online){
+            $online = 1;
+        }
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.online = :online')
+            ->setParameter('online', $online)
+            ->orderBy('p.created', 'DESC')
+            ->setMaxResults($limit ? $limit : 99999999)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

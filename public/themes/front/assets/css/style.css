@@ -37,7 +37,7 @@ body {
     background-color: #fff;
     color: #444;
     font-family: 'Montserrat', sans-serif!important;
-    font-size: 17px!important;
+    font-size: 1em!important;
     font-weight: 400;
     line-height: 28px;
 	overflow-x: hidden;
@@ -56,7 +56,6 @@ h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 	margin-top: 0px;
-	font-size: 18px;
 }
 a {
     text-decoration: none;

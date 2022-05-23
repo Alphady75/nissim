@@ -76,6 +76,18 @@ class FinancementRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByUser($user, $limit = null)
+    {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.created', 'DESC')
+            ->andWhere('f.user = :user')
+            ->setMaxResults($limit ? $limit : 99999999)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Financement
     {

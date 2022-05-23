@@ -27,19 +27,10 @@ class UserController extends AbstractController
     }
 
     #[Route('/espace-utilisateur', name: 'app_userspace', methods: ['GET'])]
-    public function profile(FinancementRepository $financementRepository, PaginatorInterface $paginator, Request $request): Response
+    public function profile(): Response
     {
-        $user = $this->getUser();
-
-        $financements = $paginator->paginate(
-            $financementRepository->findByDateDesc(),
-            $request->query->getInt('page', 1),
-            8
-        );
-
         return $this->render('user/userspace.html.twig', [
-            'user'  =>  $user,
-            'financements' => $financements,
+            'user'  =>  $this->getUser(),
         ]);
     }
 
@@ -62,6 +53,22 @@ class UserController extends AbstractController
         return $this->renderForm('user/editProfile.html.twig', [
             'user' => $user,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/vos-financements', name: 'app_user_financements', methods: ['GET', 'POST'])]
+    public function userFinancements(FinancementRepository $financementRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        $financements = $paginator->paginate(
+            $financementRepository->findByUser($user),
+            $request->query->getInt('page', 1),
+            8
+        );
+
+        return $this->renderForm('user/financements.html.twig', [
+            'financements' => $financements
         ]);
     }
 }

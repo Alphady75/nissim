@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ appName }} - Blog{% endblock %}
+
+{% block body %}
+
+<section class="section-banner" style="background-image: url({{ asset('themes/front/assets/img/cabane-one-performance.jpg') }});">
+
+    <div class="caption">
+        <div class="container">
+            <h1>{{ appName }} Blog</h1>
+            <p class="text-light">Bienvenue sur notre blog</p>
+        </div>
+    </div>
+</section>
+
+<section id="blog" class="fresh-news section-padding">
+    <div class="container">         
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    {% for post in posts %}                 
+                    <div class="col-lg-6 d-flex align-content-stretch col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                        {{ include('blog/_postbox.html.twig') }}
+                    </div>
+                    {% else %}
+                    <p class="lead">Aucune news pour l'instant...</p>
+                    {% endfor %}
+                </div>
+                <div class="pb-5">{{ knp_pagination_render(posts) }}</div>
+            </div>
+            <div class="col-md-5">
+                {{ include('blog/_sidebar.html.twig') }}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

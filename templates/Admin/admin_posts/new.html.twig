@@ -1,11 +1,20 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}Nouvel article{% endblock %}
+
+{% block colclass %}col-md-9 mx-auto{% endblock %}
+
+{% block pagetitle %}{% endblock %}
 
 {% block body %}
-    <h1>Create new Post</h1>
 
-    {{ include('admin/admin_posts/_form.html.twig') }}
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">Nouvelle article</h1>
+        </div>
+        <div class="card-body">
+            {{ include('admin/admin_posts/_form.html.twig') }}
+        </div>
+    </div>
 
-    <a href="{{ path('app_admin_posts_index') }}">back to list</a>
 {% endblock %}
