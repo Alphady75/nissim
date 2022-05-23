@@ -45,9 +45,8 @@
 						<i class="fa fa-credit-card"></i>
 					</span>
 					<div class="media-body">
-						<p class="mb-1">Financements</p>
-						<h4 class="mb-0">{{ (users|length)|number_format(0, '.', ' ') }}</h4>
-						<span class="badge badge-outline-primary">3 000 000 000 $ Collecté</span>
+						<p class="mb-1">Financements reussi ({{ (financementsReussi|length)|number_format(0, '.', ' ') }})</p>
+						<span class="badge badge-outline-primary">{{ (totalFinancements.montantTotal)|number_format(0, '.', ' ') ~ currency }} Collecté</span>
 					</div>
 				</div>
 			</div>

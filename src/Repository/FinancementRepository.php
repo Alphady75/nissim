@@ -88,15 +88,14 @@ class FinancementRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
-    public function findOneBySomeField($value): ?Financement
+    public function findTotalSum()
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select("SUM(f.montant) as montantTotal")
+            ->andWhere('f.statut = :statut')
+            ->setParameter('statut', 1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

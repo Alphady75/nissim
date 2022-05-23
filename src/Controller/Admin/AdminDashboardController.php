@@ -17,7 +17,9 @@ class AdminDashboardController extends AbstractController
         return $this->render('admin/admin_dashboard/index.html.twig', [
             'users' =>  $userRepository->findLastedRegistration(),
             'financements' =>  $financementRepository->findLasted(6),
+            'financementsReussi' => $financementRepository->findBy(['statut'=>1]),
             'projets' => $projetRepository->findAll(),
+            'totalFinancements' => $financementRepository->findTotalSum(),
 
             'controller_name' => 'AdminDashboardController',
         ]);
