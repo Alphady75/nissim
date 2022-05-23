@@ -40,16 +40,13 @@ class UserEditFormType extends AbstractType
                 ],
             ])
             ->add('roles', ChoiceType::class, [
-                'label' =>  'Choisir le rôle de cet utilisateur',
+                'label' =>  'Rôle de l\'utilisateur',
                 'choices'   =>  [
                     'Administrateur' =>  'ROLE_ADMIN',
                     'Utilisateur'    =>  'ROLE_USER',
                 ],
                 'expanded' => true,
                 'multiple' => true
-            ])
-            ->add('isVerified', CheckboxType::class, [
-                'label' =>  'Activez manuellement le compte',
             ])
         ;
     }

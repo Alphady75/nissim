@@ -77,7 +77,7 @@ class AdminUsersCrudController extends AbstractController
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         // Seul l'administrateur auteur peut editer un utilisateur
-        $this->denyAccessUnlessGranted('user_edit', $user);
+        //$this->denyAccessUnlessGranted('user_edit', $user);
         
         $form = $this->createForm(UserEditFormType::class, $user);
         $form->handleRequest($request);
