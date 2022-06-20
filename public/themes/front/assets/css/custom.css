@@ -140,3 +140,39 @@
 	height: 100%!important;
 	background: white!important;
 }
+
+.single_testimonial .about_icon {
+	display: inline-block;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+	transition: all 0.5s ease-in-out 0s;
+	color: #fff;
+	background-color: #209b4a;
+	border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% ;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 15px;
+	position: relative;
+	transition: .5s;
+}
+.single_testimonial:hover .about_icon{
+	color:#fff;
+	background-color: #209b4a;
+}
+.single_testimonial:hover .about_icon:after{
+	border-color: rgba(77, 62, 203, 0.1);
+}
+.single_testimonial h4 {
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+	margin-bottom: 15px;
+	font-size: 18px;
+	color: #1d293e;
+}
+.single_testimonial p {
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+	color: #444;
+}
