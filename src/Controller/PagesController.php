@@ -67,4 +67,13 @@ class PagesController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/conditions-general-utilisation', name: 'app_pages_conditions')]
+    public function mentionLegal(): Response
+    {
+        return $this->render('pages/conditions.html.twig', [
+            'controller_name' => 'PagesController',
+        ]);
+    }
+
 }

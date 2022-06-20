@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projets | {{ projet.name }}{% endblock %}
+{% block title %}{{ projet.name }}{% endblock %}
 
 {% block body %}
 <!-- START PROJECT AREA BANNER -->
@@ -172,16 +172,15 @@
 		<div class="row text-center">
 			<div class="col-12">
 				<div>
-					<a href="">Mention légales 
+					<a href="{{ path('app_pages_conditions') }}">Mention légales 
 					</a>
 				</div>
 
 				<div>
-					Ce site est protégé par reCAPTCHA et
-					<a href="">la politique de confidentialité</a>
+					Ce site est protégé par
+					<a href="{{ path('app_pages_conditions') }}">la politique de confidentialité</a>
 					et
-					<a href="">les conditions d'utilisation</a>
-					de Google s'appliquent.
+					<a href="{{ path('app_pages_conditions') }}">les conditions d'utilisation</a>
 				</div>
 			</div>
 		</div>
