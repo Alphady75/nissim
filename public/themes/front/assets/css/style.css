@@ -1791,9 +1791,13 @@ img{
 
 .single_testimonial {
 	margin: 0 15px;
-	padding: 40px;
+	padding: 0px;
 	background-color: #fff;
-	border: 1px solid #F7F8FF;
+	height: 100%;
+}
+.single_testimonial .card{
+	display: flex;
+	height: 100%!important;
 }
 .testi_img {
 	overflow: hidden;
@@ -1849,7 +1853,7 @@ img{
 .owl-controls .owl-page,
 .owl-controls .owl-buttons div { cursor: pointer }
 .owl-theme .owl-controls .owl-page span {
-	background-color: #209b4a !important;
+	//background-color: #209b4a !important;
 	border-radius: 4px;
 	display: block;
 	height: 7px;

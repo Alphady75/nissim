@@ -145,15 +145,15 @@ Version      : 1.0
 			
 		/* START TESTIMONIAL JS */
 			$("#testimonial-slider").owlCarousel({
-			    items:2,
-				itemsDesktop:[1000,1],
-				itemsDesktopSmall:[980,1],
-				itemsTablet:[768,1],
-				itemsMobile:[650,1],
+			    items:5,
+				itemsDesktop:[1000,5],
+				itemsDesktopSmall:[980,5],
+				itemsTablet:[768,3],
+				itemsMobile:[650,2],
 				pagination:true,
 				navigation:false,
 				slideSpeed:1000,
-				autoPlay:false
+				autoPlay:true
 			});
 		/* END TESTIMONIAL JS */		
 
