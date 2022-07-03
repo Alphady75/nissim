@@ -45,8 +45,8 @@ class AdminPostsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $projet->setSlug($this->sluger->slug($projet->getName()));
-            $projet->setUser($this->getUser());
+            $post->setSlug($this->sluger->slug($post->getName()));
+            $post->setUser($this->getUser());
 
             $this->addFlash('success', 'Le contenu a bien été enregistrer avec succès');
 

@@ -52,7 +52,7 @@
 
                         {% endif %}
                     </td>
-                    <td><span class="badge badge-outline-{{ post.online ? 'success' : 'danger' }}">{{ post.online ? 'On ligne' : 'Hors ligne' }}</span></td>
+                    <td><span class="badge badge-outline-{{ post.online ? 'success' : 'danger' }}">{{ post.online ? 'Public' : 'Privé' }}</span></td>
                     <td>{{ post.created ? post.created|date('d/m/Y') : '' }}</td>
                     <td>
                         <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#postmodal-{{ post.id }}"><i class="fa fa-eye"></i></a>

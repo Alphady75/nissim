@@ -37,7 +37,7 @@ class PagesController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_pages_contact')]
-    public function contact(Request $request, MailerInterface $mailerInterface): Response
+    public function contact(Request $request): Response
     {
         $form = $this->createForm(ContactType::class);
         $contact = $form->handleRequest($request);
